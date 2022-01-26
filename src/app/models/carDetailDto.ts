@@ -1,6 +1,4 @@
-import { DecimalPipe } from "@angular/common";
-
-export interface Car{
+export interface CarDetailDto{
     carId:number;
     carName:string;
     brandName:string;

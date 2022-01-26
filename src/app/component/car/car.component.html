@@ -7,10 +7,8 @@
             
             <th>Renk </th>
             <th>Marka</th>
-            <th>Araç İsmi</th>
-            <th>Model Yılı</th>
-            <th>Günlük Ücret</th>
-            <th>Açıklama</th>
+            <th>Araç İsmi</th>           
+            <th>Günlük Ücret</th>          
             
            
         </tr>
@@ -19,9 +17,9 @@
         
         <td>{{car.colorName}}</td> 
         <td>{{car.brandName}}</td>
-        <td>{{car.carName}}</td>         
-        <td>{{car.modelYear}}</td>
+        <td>{{car.carName}}</td>       
         <td>{{car.dailyPrice}} ₺</td>  
-        <td>{{car.description}}</td>                  
+        <button (click)="SetCurrentDetail(car)" 
+        routerLink="/cars/car-detail/{{car.carId}}" type="button" class="btn btn-primary">Detaylar</button>                 
     </tr>
 </table>

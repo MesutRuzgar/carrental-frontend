@@ -3,14 +3,15 @@
   </div>
 <table *ngIf="dataLoaded==true" class="table">
     <thead>
-        <tr>
-           
-            <th>Markalar</th>
-           
+        <tr>           
+            <th>Markalar</th>           
         </tr>
     </thead>
-    <tr *ngFor="let brand of brands">
+    <ul class="list-group">
+        <li  [class]="getAllBrandClass()"  (click)="resetCurrentBrand()" routerLink="/cars">Tüm Markalar</li>
+        <li (click)="SetCurrentBrand(brand)" 
+        routerLink="/cars/brand/{{brand.brandName}}"
+         *ngFor="let brand of brands" [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
         
-        <td>{{brand.brandName}}</td>                 
-    </tr>
+      </ul>
 </table>

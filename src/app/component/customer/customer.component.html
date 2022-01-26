@@ -3,16 +3,13 @@
   </div>
 <table *ngIf="dataLoaded==true" class="table">
     <thead>
-        <tr>
-            
-            <th>Kullanıcı</th>
-            <th>Şirket Adı</th>
-           
+        <tr>           
+            <th>Şirket Adı</th>           
         </tr>
     </thead>
-    <tr *ngFor="let customer of customers">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let customer of customers">{{customer.companyName}}</li>
         
-        <td>{{customer.userName}}</td>  
-        <td>{{customer.companyName}}</td>                 
-    </tr>
+    </ul>
 </table>
+
