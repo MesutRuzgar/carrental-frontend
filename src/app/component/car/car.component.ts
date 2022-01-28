@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CarDetailDto } from 'src/app/models/carDetailDto';
-import { CarDetailDtoService } from 'src/app/services/carDetailDto.service';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { Car } from 'src/app/models/car';
+import { CarImage } from 'src/app/models/carImage';
+import { CarService } from 'src/app/services/car.service';
+
 
 
 @Component({
@@ -13,12 +14,13 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
    
 })
 export class CarComponent implements OnInit {
-  cars:CarDetailDto[]=[];
-  currentCar:CarDetailDto;
-  public dialog:MatDialog;
+  cars:Car[]=[];
+  currentCar:Car;
+  imgUrl="https://localhost:44322";
+  defaultImage="/default.png"
   dataLoaded=false;
 
-  constructor(private carDetailDtoService:CarDetailDtoService,private activatedRoute:ActivatedRoute) { }
+  constructor(private carService:CarService,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -38,32 +40,35 @@ export class CarComponent implements OnInit {
     
   }
   getCars(){
-    this.carDetailDtoService.getCars().subscribe(response=>{
+    this.carService.getCars().subscribe(response=>{
       this.cars=response.data;
 this.dataLoaded=true;
     })
   }
   getCarsByBrand(brandName:string){
-    this.carDetailDtoService.getCarsByBrand(brandName).subscribe(response=>{
+    this.carService.getCarsByBrand(brandName).subscribe(response=>{
       this.cars=response.data
       this.dataLoaded=true;
     })
   }
   getCarsByColor(colorName:string){
-    this.carDetailDtoService.getCarsByColor(colorName).subscribe(response=>{
+    this.carService.getCarsByColor(colorName).subscribe(response=>{
       this.cars=response.data
       this.dataLoaded=true;
     })
   }
-  SetCurrentCar(car:CarDetailDto){
+  SetCurrentCar(car:Car){
     this.currentCar=car;
   }
-  SetCurrentDetail(car:CarDetailDto){
+  SetCurrentDetail(car:Car){
     this.currentCar=car;
   }
   getCarById(carId:number){
-    this.carDetailDtoService.getCarById(carId).subscribe(response=>{
+    this.carService.getCarById(carId).subscribe(response=>{
       this.cars=response.data
     })
+  }
+  getPath(images:CarImage[]){    
+    return this.imgUrl+images[0].imagePath;
   }
 }
