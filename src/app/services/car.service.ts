@@ -17,12 +17,12 @@ export class CarService {
     let newPath=this.apiUrl+"cars/getcardetails"
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
-  getCarsByBrand(brandName:string):Observable<ListResponseModel<Car>>{
-    let newPath=this.apiUrl+ "cars/getcarsbybrand?BrandName="+brandName
+  getCarsByBrandId(brandId:number):Observable<ListResponseModel<Car>>{
+    let newPath=this.apiUrl+ "cars/getcarsbybrandid?brandId="+brandId
     return this.httpClient.get<ListResponseModel<Car>>(newPath);   
    }
-   getCarsByColor(colorName:string):Observable<ListResponseModel<Car>>{
-    let newPath=this.apiUrl+ "cars/getcarsbycolor?colorName="+colorName
+   getCarsByColorId(colorId:number):Observable<ListResponseModel<Car>>{
+    let newPath=this.apiUrl+ "cars/getcarsbycolorid?colorId="+colorId
     return this.httpClient.get<ListResponseModel<Car>>(newPath);   
    }
    getCarById(carId:number):Observable<ListResponseModel<Car>>{
@@ -32,6 +32,10 @@ export class CarService {
    getCarByImage(carId:number):Observable<ListResponseModel<CarImage>>{
      let newPath=this.apiUrl+"carImages/getimagesbycarid?CarId="+carId
      return this.httpClient.get<ListResponseModel<CarImage>>(newPath)
+   }
+   getCarsWithBrandAndColor(brandId:number,colorId:number):Observable<ListResponseModel<Car>>{
+     let newPath=this.apiUrl+"cars/getcarswithbrandandcolor?brandId="+brandId+"&colorId="+colorId
+     return this.httpClient.get<ListResponseModel<Car>>(newPath);
    }
 
 }

@@ -12,6 +12,7 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarDetailComponent implements OnInit {
   cardetail:Car;
+  currentDetail:Car;
   carImage:CarImage;
   imgUrl="https://localhost:44322";
 
@@ -35,5 +36,8 @@ export class CarDetailComponent implements OnInit {
     }
     getPath(path:string){
       return this.imgUrl+path;
+    }
+    setCurrentDetail(car:Car){
+    this.currentDetail=car;
     }
 }

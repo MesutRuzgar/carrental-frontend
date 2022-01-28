@@ -6,6 +6,10 @@
   <strong>Araç Markası: </strong><p>{{cardetail.brandName}}</p>
   <strong>Araç Model Yılı: </strong><p>{{cardetail.modelYear}}</p>
   <strong>Araç Detayı: </strong><p>{{cardetail.description}}</p>
-  <a href="http://localhost:4200/">Geri</a>
-  <!-- <p><button>Geri</button></p> -->
+    <div class="card-body">
+    <div class="d-flex action justify-content-between">
+      <a href="" class="btn btn-success">Kirala</a>
+      <a (click)="setCurrentDetail(cardetail)" routerLink="/cars/"
+      class="btn btn-primary">Geri</a>
+    </div>  
 </div>
