@@ -8,8 +8,69 @@
   <strong>Araç Detayı: </strong><p>{{cardetail.description}}</p>
     <div class="card-body">
     <div class="d-flex action justify-content-between">
-      <a href="" class="btn btn-success">Kirala</a>
+      <!-- <a (click)="addToCart(cardetail)" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Kirala</a> -->
+      <a  (click)="triggerModal(modalData)" class="btn btn-success" >Kirala</a>
       <a (click)="setCurrentDetail(cardetail)" routerLink="/cars/"
       class="btn btn-primary">Geri</a>
     </div>  
 </div>
+
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Araç Kiralama Detayları</h4>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button> -->   
+  </div>
+  <div class="modal-body">
+   
+    <img [src]="getPath(carImage.imagePath)" class="d-block w-100" width="450" height="250" alt="Image"/>
+   <div class="row">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <span class="float-start">Marka</span>
+        <span class="float-end">{{cardetail.brandName}}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="float-start">Renk</span>
+        <span class="float-end">{{cardetail.colorName}}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="float-start">Model</span>
+        <span class="float-end">{{cardetail.modelYear}}</span>
+      </li>              
+        <p class="card-text text-center h3 mt-3 price">{{cardetail.dailyPrice }} ₺</p>
+      </ul>
+   </div><br>
+   <div class="row">
+    <p><strong>Kiralamak istediğiniz <span class="text-primary">"tarih aralığını"</span> seçiniz</strong></p>
+   </div>
+   <form>
+    <div class="row">
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="rentDate">Kiralama Tarihi</label>
+      <input [(ngModel)]="rentDate"  type="date" class="form-control" id="rentDate"  min="{{minDate}}" max='{{maxDate}}' name="rentDate" (input)='minDateChange($event)' >
+      <p *ngIf="message" class="text-danger"> {{message}} </p>
+    </div>
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="returnDate">Geri Dönüş Tarihi</label>
+      <input [(ngModel)]="returnDate" type="date" class="form-control" id="returnDate" name="returnDate" min='{{minDate}}' max='{{maxDate}}' (input)='totalAmount()'>
+    </div>
+   </div>
+  </form>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+  </div> -->
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-7">
+      <button type="button" class="btn btn-success" style="width: 90px;" >Ödeme</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-danger" style="width: 90px;" >İptal</button>
+    </div>
+    <div class="col-sm-1"></div>
+  </div><br>
+  
+</ng-template>
