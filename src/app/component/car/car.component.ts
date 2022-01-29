@@ -30,7 +30,7 @@ export class CarComponent implements OnInit {
   dataLoaded=false;
 
   constructor(private carService:CarService,private activatedRoute:ActivatedRoute,
-    private brandService:BrandService,private colorService:ColorService) { }
+    private brandService:BrandService,private colorService:ColorService,) { }
 
   ngOnInit(): void {
     this.colorService.getColors().subscribe(params=>{

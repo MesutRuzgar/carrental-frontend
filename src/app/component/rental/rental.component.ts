@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {RentalDetailDto } from 'src/app/models/rentalDetailDto';
-import { RentalDtailDtoService } from 'src/app/services/rental.service';
+import {Rental } from 'src/app/models/rental';
+import { RentalService } from 'src/app/services/rental.service';
 
 
 @Component({
@@ -9,10 +9,11 @@ import { RentalDtailDtoService } from 'src/app/services/rental.service';
   styleUrls: ['./rental.component.css']
 })
 export class RentalComponent implements OnInit {
-  rentals:RentalDetailDto[]=[];
+  
+  rentals:Rental[]=[];
   dataLoaded=false;
 
-  constructor(private rentalService:RentalDtailDtoService) { }
+  constructor(private rentalService:RentalService) { }
 
   ngOnInit(): void {
     this.getRentals();

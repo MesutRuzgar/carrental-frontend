@@ -51,15 +51,11 @@
             <li class="list-group-item">
               <span class="float-start">Model</span>
               <span class="float-end">{{car.modelYear}}</span>
-            </li>              
-              <p class="card-text text-center h3 mt-3 price">{{car.dailyPrice }} ₺</p>
+            </li>       
             </ul>
-            <div class="card-body">
-              <div class="d-flex action justify-content-between">
-                <a href="" class="btn btn-success">Kirala</a>
+            <div class="card-body">             
                 <a (click)="setCurrentCar(car)" routerLink="/cars/car-detail/{{car.carId}}"
-                class="btn btn-primary">Detaylar</a>
-              </div>
+                class="btn btn-primary">Detaylar</a>              
             </div>
           </div>
           </div>

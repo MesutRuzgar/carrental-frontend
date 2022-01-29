@@ -12,13 +12,15 @@ import { ColorComponent } from './component/color/color.component';
 import { BrandComponent } from './component/brand/brand.component';
 import { CustomerComponent } from './component/customer/customer.component';
 import { NaviComponent } from './component/navi/navi.component';
-import { RentalComponent } from './component/rental/rental.component';
 import { CarDetailComponent } from './component/car-detail/car-detail.component';
 import { BrandFilterPipePipe } from './pipes/brand-filter-pipe.pipe';
 import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
 import { CarFilterPipePipe } from './pipes/car-filter-pipe.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { CartSummaryComponent } from './component/cart-summary/cart-summary.component';
+import { RentalComponent } from './component/rental/rental.component';
+import { RentModalComponent } from './component/rent-modal/rent-modal.component';
+
 
 
 
@@ -38,6 +40,8 @@ import { CartSummaryComponent } from './component/cart-summary/cart-summary.comp
     ColorFilterPipePipe,
     CarFilterPipePipe,
     CartSummaryComponent,
+    RentModalComponent,
+  
 
     
   ],
@@ -45,7 +49,7 @@ import { CartSummaryComponent } from './component/cart-summary/cart-summary.comp
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule,    
     BrowserAnimationsModule,
     NgbModule,
     ToastrModule.forRoot({

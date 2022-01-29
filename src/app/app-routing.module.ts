@@ -5,6 +5,7 @@ import { CarDetailComponent } from './component/car-detail/car-detail.component'
 import { CarComponent } from './component/car/car.component';
 import { ColorComponent } from './component/color/color.component';
 
+
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent},
   {path:"cars",component:CarComponent},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path : "colors" , component : ColorComponent},
   {path:"cars/brand/:brandId",component:CarComponent},
   {path:"cars/color/:colorId",component:CarComponent},
-  {path:"cars/car-detail/:carId",component:CarDetailComponent}
+  {path:"cars/car-detail/:carId",component:CarDetailComponent},
+  
 
 ];
 

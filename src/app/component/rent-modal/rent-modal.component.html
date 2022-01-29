@@ -1,0 +1,54 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sepetmodal">
+    Sepete Ekle
+  </button> 
+<!-- Modal -->
+<div class="modal fade  " id="sepetmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Araç Kiralama Detayları</h5>       
+                </div>
+                     <div class="modal-body">
+                    <img [src]="getPath(carImage.imagePath)" class="d-block w-100" width="450" height="250" alt="Image"/>
+                     </div>
+            <div class="modal-body">
+            <div class="row">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">        
+                    <strong>Araç Markası: </strong><span class="float-end">{{cardetail.brandName}}</span>
+                    </li>
+                <li class="list-group-item">        
+                    <strong>Araç Rengi: </strong> <span class="float-end">{{cardetail.colorName}}</span>
+                </li>
+                    <li class="list-group-item">        
+                        <strong>Araç Model Yılı: </strong><span class="float-end">{{cardetail.modelYear}}</span>
+                    </li>              
+                    <p class="card-text text-center h3 mt-3 price">{{cardetail.dailyPrice }} ₺/Günlük</p>
+                </ul>
+            </div><br>
+            <div class="row">
+                <p><strong>Kiralamak istediğiniz <span class="text-primary">"tarih aralığını"</span> seçiniz</strong></p>
+            </div>
+            <div class="modal-footer"></div>
+            <form>
+                <div class="row">
+                    <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="rentDate">Kiralama Tarihi</label>
+                    <input [(ngModel)]="rentDate"  type="date" class="form-control" id="rentDate"   name="rentDate" #eventrentdate  >
+                    </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                        <label for="returnDate" >Geri Dönüş Tarihi</label>
+                        <input [(ngModel)]="returnDate" type="date" class="form-control" id="returnDate" name="returnDate"  #eventreturndate>
+                        </div>
+                 </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="kapatbutonu" data-bs-dismiss="modal">Geri</button>
+            <button (click)="checkDate(cardetail.carId, eventrentdate.value, eventreturndate.value)" type="button" class="btn btn-success">Sepete Ekle</button>        
+            </div>            
+        </div>
+    </div>
+  </div>
+

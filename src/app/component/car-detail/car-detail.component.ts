@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { CarService } from 'src/app/services/car.service';
+import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/services/cart.service';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -14,9 +14,10 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./car-detail.component.css']
 })
 export class CarDetailComponent implements OnInit {
+  car:Car;
   cardetail:Car;
   currentDetail:Car;
-  carImage:CarImage;
+  carImages:CarImage;
   closeModal: string;
   minDate?: string = '';
   maxDate?: string = '';
@@ -25,8 +26,10 @@ export class CarDetailComponent implements OnInit {
   message:string
   imgUrl="https://localhost:44322";
 
-  constructor(private carService:CarService,private activatedRoute:ActivatedRoute,
-    private toastrService:ToastrService,private cartService:CartService,private modalService: NgbModal) { }
+  constructor(private carService:CarService,
+    private activatedRoute:ActivatedRoute,   
+    private toastrService:ToastrService,
+    private cartService:CartService) { }
 
   ngOnInit(): void { 
     this.activatedRoute.params.subscribe(params=>{
@@ -41,7 +44,7 @@ export class CarDetailComponent implements OnInit {
     }
     getByCarImage(carId:number){
       this.carService.getCarByImage(carId).subscribe(result=>{
-        this.carImage=result.data[0]
+        this.carImages=result.data[0]
       })     
     }
     getPath(path:string){
@@ -50,27 +53,13 @@ export class CarDetailComponent implements OnInit {
     setCurrentDetail(car:Car){
     this.currentDetail=car;
     }
+
     addToCart(car:Car){
       this.toastrService.success("Sepete eklendi.",car.carName)
       this.cartService.addToCart(car);
       }
-      triggerModal(content:any) {
-        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((res) => {
-          this.closeModal = `Closed with: ${res}`;
-        }, (res) => {
-          this.closeModal = `Dismissed ${this.getDismissReason(res)}`;
-        });
-      }
       
-      private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-          return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-          return 'by clicking on a backdrop';
-        } else {
-          return  `with: ${reason}`;
-        }
-      }
+            
       totalAmount(){
         let differance = new Date(this.returnDate).getTime() -  new Date(this.rentDate).getTime();
         let price = new Date(differance).getDate();
