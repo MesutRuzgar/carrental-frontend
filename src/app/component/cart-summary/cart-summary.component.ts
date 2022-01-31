@@ -27,5 +27,5 @@ export class CartSummaryComponent implements OnInit {
     this.cartService.removeFromCart(car);
     this.toastrService.error(car.carName+ "  Sepetten silindi.");
   }
-
+  goToCart():void{}
 }

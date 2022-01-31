@@ -17,7 +17,7 @@ export class CarDetailComponent implements OnInit {
   car:Car;
   cardetail:Car;
   currentDetail:Car;
-  carImages:CarImage;
+  carImages:CarImage[]=[];
   closeModal: string;
   minDate?: string = '';
   maxDate?: string = '';
@@ -44,7 +44,7 @@ export class CarDetailComponent implements OnInit {
     }
     getByCarImage(carId:number){
       this.carService.getCarByImage(carId).subscribe(result=>{
-        this.carImages=result.data[0]
+        this.carImages=result.data
       })     
     }
     getPath(path:string){

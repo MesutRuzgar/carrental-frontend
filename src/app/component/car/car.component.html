@@ -30,7 +30,7 @@
         </div>
 
   <div class="row">
-    <div  class="col-lg-4 col-md-6 p-3 mb-5 bg-body rounded " *ngFor="let car of cars | carFilterPipe:filterText">
+    <div  class="col-lg-4 col-md-6 p-3 mb-5 bg-body rounded " *ngFor="let car of cars | carFilterPipe:filterText "  >
       <div class="card border-0 mb-3" style="width: 18rem;">
         <img src="car-image" *ngIf="car.carImage.length==0" src="{{imgUrl}}{{defaultImage}}">
         <img *ngIf="car.carImage.length!=0" class="car-image" [src]="getPath(car.carImage)" class="card-img-top" alt="Image" width="300" height="200">

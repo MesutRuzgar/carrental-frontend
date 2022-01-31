@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from '../models/car';
 import { CartItem } from '../models/cartItem';
 import { CartItems } from '../models/cartItems';
@@ -8,12 +9,12 @@ import { CartItems } from '../models/cartItems';
 })
 export class CartService {
 
-  constructor() { }
+  constructor(private toastrService:ToastrService) { }
   
   addToCart(car:Car){
     let item = CartItems.find(c=>c.car.carId===car.carId);
     if(item){
-      item.quantity+=1;
+      this.toastrService.error("Araç daha önce sepete eklenmiş")
     }else{
       let carItem=new CartItem();
       carItem.car= car;

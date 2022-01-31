@@ -20,6 +20,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { CartSummaryComponent } from './component/cart-summary/cart-summary.component';
 import { RentalComponent } from './component/rental/rental.component';
 import { RentModalComponent } from './component/rent-modal/rent-modal.component';
+import { CartComponent } from './component/cart/cart.component';
+import { PaymentComponent } from './component/payment/payment.component';
 
 
 
@@ -41,6 +43,8 @@ import { RentModalComponent } from './component/rent-modal/rent-modal.component'
     CarFilterPipePipe,
     CartSummaryComponent,
     RentModalComponent,
+    CartComponent,
+    PaymentComponent,
   
 
     

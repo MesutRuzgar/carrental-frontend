@@ -54,6 +54,7 @@ export class RentModalComponent implements OnInit {
     this.toastrService.success("Sepete eklendi.",car.carName)
     this.cartService.addToCart(car);
   }
+  
   checkDate(carId:number,returnDate:string,rentDate:string){
     this.rentalService.getCheckRentDate(carId,returnDate,rentDate).subscribe(result=>{
       this.ikiTarihAraligiVarMi=result.data;

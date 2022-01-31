@@ -1,6 +1,13 @@
-<div class="card">
-  <img [src]="getPath(carImages.imagePath)" class="d-block w-100" width="450" height="250" alt="Image"/>
-
+<div class="card">  
+  <ngb-carousel>
+    <ng-template *ngFor="let carImage of carImages" ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="getPath(carImage.imagePath)" alt="Random first slide" class="d-block w-100"
+          style="width: auto; height: auto;">
+      </div>
+    </ng-template>    
+  </ngb-carousel>
+  
   <h1>{{cardetail.carName}}</h1>
   <strong>Günlük Ücret: </strong><p class="price">{{cardetail.dailyPrice}} ₺</p>
   <strong>Araç Rengi: </strong><p>{{cardetail.colorName}}</p>
@@ -14,3 +21,7 @@
       class="btn btn-primary">Geri</a>
     </div>  
 </div>
+<script>$('.carousel').carousel({
+  interval: 1000
+})
+</script>
