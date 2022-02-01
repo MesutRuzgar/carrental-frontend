@@ -11,15 +11,19 @@ export class CartService {
 
   constructor(private toastrService:ToastrService) { }
   
-  addToCart(car:Car){
+  addToCart(car:Car,rentDate:Date,returnDate:Date){
     let item = CartItems.find(c=>c.car.carId===car.carId);
     if(item){
-      this.toastrService.error("Araç daha önce sepete eklenmiş")
+      this.toastrService.error("Araç Tekrar eklenemez","Araç daha önce sepete eklenmiş!")
     }else{
       let carItem=new CartItem();
       carItem.car= car;
-      carItem.quantity=1;
+      carItem.rentDate=rentDate;
+      carItem.returnDate=returnDate;
       CartItems.push(carItem)
+      this.toastrService.success("Sepete eklendi.",car.carName);
+      this.toastrService.success("Ödeme için sepetinize gidiniz. "); 
+      
     }
   }
   removeFromCart(car:Car){

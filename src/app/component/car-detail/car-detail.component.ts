@@ -18,12 +18,6 @@ export class CarDetailComponent implements OnInit {
   cardetail:Car;
   currentDetail:Car;
   carImages:CarImage[]=[];
-  closeModal: string;
-  minDate?: string = '';
-  maxDate?: string = '';
-  rentDate:Date;
-  returnDate:Date;
-  message:string
   imgUrl="https://localhost:44322";
 
   constructor(private carService:CarService,
@@ -54,26 +48,11 @@ export class CarDetailComponent implements OnInit {
     this.currentDetail=car;
     }
 
-    addToCart(car:Car){
+    addToCart(car:Car,rentDate:Date,returnDate:Date){
       this.toastrService.success("Sepete eklendi.",car.carName)
-      this.cartService.addToCart(car);
+      this.cartService.addToCart(car,rentDate,returnDate);
       }
       
             
-      totalAmount(){
-        let differance = new Date(this.returnDate).getTime() -  new Date(this.rentDate).getTime();
-        let price = new Date(differance).getDate();
-        // this.paymentService.totalPrice = price * this.carforRent.dailyPrice;
-      }
-    
-    
-      minDateChange(date: any) {
-        this.minDate = date.target.value;
-        // this.maxDate = this.datePipe.transform(
-        //   new Date(
-        //     new Date(this.minDate).setFullYear(new Date().getFullYear() + 1)
-        //   ),
-        //   'yyyy-MM-dd'
-        // );
-      }
+      
 }

@@ -5,6 +5,7 @@ import { CarDetailComponent } from './component/car-detail/car-detail.component'
 import { CarComponent } from './component/car/car.component';
 import { CartComponent } from './component/cart/cart.component';
 import { ColorComponent } from './component/color/color.component';
+import { PaymentSuccessComponent } from './component/payment-success/payment-success.component';
 import { PaymentComponent } from './component/payment/payment.component';
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:"cars/car-detail/:carId",component:CarDetailComponent},
   {path:"cart",component:CartComponent},
   {path:"payment",component:PaymentComponent},
+  {path:"payment-success",component:PaymentSuccessComponent}
   
 
 ];

@@ -195,7 +195,9 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    background: url("http://cdn.flaticon.com/svg/44/44386.svg") no-repeat center;
+    background: linear-gradient(
+        135deg
+        , #bd6772, #53223f) no-repeat center;
     background-size: cover;
     opacity: .05;
 }

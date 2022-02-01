@@ -116,11 +116,7 @@ $(".js-card-ccv")
     <form class="form" autocomplete="off" novalidate>
         <fieldset>
             <label for="card-number">Card Number</label>
-            <!-- <input type="num" id="card-number" class="input-cart-number js-input-cart-number" maxlength="4" />
-            <input type="num" id="card-number-1" class="input-cart-number js-input-cart-number" maxlength="4" />
-            <input type="num" id="card-number-2" class="input-cart-number js-input-cart-number" maxlength="4" />
-            <input type="num" id="card-number-3" class="input-cart-number js-input-cart-number" maxlength="4" /> -->
-            <input [(ngModel)]="cardNumber" type="num" id="card-number" class="input-cart-number js-input-cart-number" name="cardNumber" maxlength="16" #eventcardnumber/>
+            <input [(ngModel)]="cardNumber" type="num" id="card-number-1" class="input-cart-number js-input-cart-number " style="width: 100%;" name="cardNumber" maxlength="16" #eventcardnumber/>
         </fieldset>
         <fieldset>
             <label for="card-holder">Card holder</label>
@@ -165,8 +161,11 @@ $(".js-card-ccv")
             <label for="card-ccv">CVV</label>
             <input [(ngModel)]="cvv" type="text" id="card-ccv" class="js-card-ccv" name="cvv" maxlength="3" #eventcvv/>
         </fieldset>
-        <button (click)="checkCreditCard(eventcardholder.value,eventcardnumber.value,eventcvv.value,eventexpirationmonth.value,eventexpirationyear.value)" class="btn">Onayla</button>
+        
+        <button (click)="checkCreditCard(eventcardholder.value,eventcardnumber.value,eventcvv.value,eventexpirationmonth.value,eventexpirationyear.value)"  class="btn">Onayla</button>
     </form>
 </div>
+
+
 
 

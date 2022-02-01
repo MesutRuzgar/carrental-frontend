@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,6 +22,7 @@ import { RentalComponent } from './component/rental/rental.component';
 import { RentModalComponent } from './component/rent-modal/rent-modal.component';
 import { CartComponent } from './component/cart/cart.component';
 import { PaymentComponent } from './component/payment/payment.component';
+import { PaymentSuccessComponent } from './component/payment-success/payment-success.component';
 
 
 
@@ -45,6 +46,7 @@ import { PaymentComponent } from './component/payment/payment.component';
     RentModalComponent,
     CartComponent,
     PaymentComponent,
+    PaymentSuccessComponent,
   
 
     
@@ -56,6 +58,7 @@ import { PaymentComponent } from './component/payment/payment.component';
     FormsModule,    
     BrowserAnimationsModule,
     NgbModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     })

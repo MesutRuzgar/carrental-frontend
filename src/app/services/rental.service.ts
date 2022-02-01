@@ -19,7 +19,7 @@ export class RentalService {
     return this.httpClient.get<ListResponseModel<Rental>>(newPath);
   }
 
-  getCheckRentDate(carId:number,rentDate:string,returnDate:string):Observable<SingleResponseModel>{
+  getCheckRentDate(carId:number,rentDate:Date,returnDate:Date):Observable<SingleResponseModel>{
     let newPath=this.apiUrl+"rentals/getcheckrentdate?carId="+carId+"&rentDate="+rentDate+"&returnDate="+returnDate;
     return this.httpClient.get<SingleResponseModel>(newPath);
   }

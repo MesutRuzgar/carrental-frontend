@@ -18,8 +18,9 @@ export class RentModalComponent implements OnInit {
   cardetail:Car;
   carImage:CarImage;
   ikiTarihAraligiVarMi:boolean=false;
-  returnDate:string;
-  rentDate:string;
+  returnDate:Date;
+  rentDate:Date;
+  toDayDate:Date;
   imgUrl="https://localhost:44322";
 
   constructor(private carService:CarService,
@@ -50,23 +51,21 @@ export class RentModalComponent implements OnInit {
   getPath(path:string){
     return this.imgUrl+path;
   }
-  addToCart(car:Car){
-    this.toastrService.success("Sepete eklendi.",car.carName)
-    this.cartService.addToCart(car);
-  }
+ 
   
-  checkDate(carId:number,returnDate:string,rentDate:string){
-    this.rentalService.getCheckRentDate(carId,returnDate,rentDate).subscribe(result=>{
+  checkDate(carId:number,rentDate:Date,returnDate:Date){      
+      this.rentalService.getCheckRentDate(carId,rentDate,returnDate).subscribe(result=>{
       this.ikiTarihAraligiVarMi=result.data;
       if(this.ikiTarihAraligiVarMi){
         this.toastrService.error("Araç seçili tarihler arasında kiradadır. Lütfen başka tarih deneyiniz");
+      }else if(rentDate>returnDate){
+        this.toastrService.error("Teslim tarihi,Kiralama tarihinden önceki bir tarih olamaz!","Lütfen gerekli alanları düzeltiniz!");
       }
-      else{
-        this.toastrService.success("Ödeme için sepetinize gidiniz. "); 
-        this.addToCart(this.cardetail);
+      else{     
+        this.cartService.addToCart(this.cardetail,rentDate,returnDate);        
         document.getElementById("kapatbutonu").click();           
       }
     })
   }
- 
+  
 }

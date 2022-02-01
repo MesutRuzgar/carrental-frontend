@@ -35,18 +35,18 @@
                 <div class="row">
                     <div class="form-group" style="margin-bottom: 15px;">
                     <label for="rentDate">Kiralama Tarihi</label>
-                    <input [(ngModel)]="rentDate"  type="date" class="form-control" id="rentDate"   name="rentDate" #eventrentdate  >
+                    <input [(ngModel)]="rentDate"  type="date" class="form-control" id="rentDate"   name="rentDate"    >
                     </div>
                         <div class="form-group" style="margin-bottom: 15px;">
                         <label for="returnDate" >Teslim Tarihi</label>
-                        <input [(ngModel)]="returnDate" type="date" class="form-control" id="returnDate" name="returnDate"  #eventreturndate>
+                        <input [(ngModel)]="returnDate" type="date" class="form-control" id="returnDate" name="returnDate"  >
                         </div>
                  </div>
             </form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-danger" id="kapatbutonu" data-bs-dismiss="modal">Geri</button>
-            <button (click)="checkDate(cardetail.carId, eventrentdate.value, eventreturndate.value)" type="button" class="btn btn-success">Sepete Ekle</button>        
+            <button (click)="checkDate(cardetail.carId, rentDate ,returnDate )" type="button" class="btn btn-success">Sepete Ekle</button>        
             </div>            
         </div>
     </div>
