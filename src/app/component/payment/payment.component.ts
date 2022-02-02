@@ -25,20 +25,26 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
    this.getCart();
   }
+  // goToPaymentSuccess(cartItems:CartItem[]):void{
+  //   this.cartItems;
+  // }
 
-
+  // ,cartItems:CartItem[]
   checkCreditCard(cardHolder:string,cardNumber:string,cvv:string,expirationMonth:string,expirationYear:string){
     this.creditCardService.getCheckCreditCard(cardHolder,cardNumber,cvv,expirationMonth,expirationYear).subscribe(result=>{
       this.sonuc=result.data          
       if(this.sonuc){
-        this.toastrService.success("Kart bilgileriniz onaylandı.","Ödeme yapılıyor")        
+        this.toastrService.success("Kart bilgileriniz onaylandı.","Ödeme yapılıyor");
+        // this.goToPaymentSuccess(cartItems);        
       }
       else{
-        this.toastrService.error("Lütfen kart bilgilerinizi kontrol ediniz.","Kart bilgileriniz onaylanmadı.")
+        this.toastrService.error("Lütfen kart bilgilerinizi kontrol ediniz.","Kart bilgileriniz onaylanmadı.");
       }
     })
     }
     getCart(){
       this.cartItems=this.cartService.list();     
     }
+
+    
 }

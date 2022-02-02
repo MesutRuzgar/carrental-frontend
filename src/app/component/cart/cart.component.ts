@@ -28,8 +28,12 @@ export class CartComponent implements OnInit {
     this.cartItems=this.cartService.list();
    
   }
-  goToPayment():void{}
-  
+  // goToPayment(cartItems:CartItem[]):void{
+  //   this.cartItems;
+  // }
+  goToPayment():void{
+    
+  }
   getPath(path:string){
     return this.imgUrl+path;
   }

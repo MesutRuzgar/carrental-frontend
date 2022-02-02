@@ -160,9 +160,8 @@ $(".js-card-ccv")
         <fieldset class="fieldset-ccv">
             <label for="card-ccv">CVV</label>
             <input [(ngModel)]="cvv" type="text" id="card-ccv" class="js-card-ccv" name="cvv" maxlength="3" #eventcvv/>
-        </fieldset>
-        
-        <button (click)="checkCreditCard(eventcardholder.value,eventcardnumber.value,eventcvv.value,eventexpirationmonth.value,eventexpirationyear.value)"  class="btn">Onayla</button>
+        </fieldset>        
+        <button (click)="checkCreditCard(eventcardholder.value,eventcardnumber.value,eventcvv.value,eventexpirationmonth.value,eventexpirationyear.value)" routerLink="/payment-success" class="btn">Onayla</button>
     </form>
 </div>
 

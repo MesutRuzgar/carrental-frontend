@@ -7,7 +7,12 @@
         <span class="badge bg-info text-dark">{{cartItem.rentDate}}</span>{{cartItem.returnDate}}{{cartItem.car.carName}}<span (click)="removeFromCart(cartItem.car)" class="badge bg-danger">Sil</span></a></li>
       <li><hr class="dropdown-divider"></li>      
       <div class="btn-group" role="group" aria-label="Basic mixed styles example">        
-        <button type="button" (click)="goToCart()" routerLink="/cart"  class="btn btn-success">Sepete Git</button>
+        <button type="button" (click)="goToCart()" routerLink="/cart"  class="btn btn-success" [hidden]="cartItems.length === 0">Sepete Git</button>
+        <div *ngIf="cartItems.length === 0">
+         <span>
+           Sepetiniz Boş!
+         </span> 
+        </div>
         
       </div>
     </ul>

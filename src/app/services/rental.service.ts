@@ -23,5 +23,5 @@ export class RentalService {
     let newPath=this.apiUrl+"rentals/getcheckrentdate?carId="+carId+"&rentDate="+rentDate+"&returnDate="+returnDate;
     return this.httpClient.get<SingleResponseModel>(newPath);
   }
- 
+  
 }

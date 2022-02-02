@@ -4,4 +4,5 @@ export class CartItem{
     car:Car;
     rentDate:Date;
     returnDate:Date;
+    
 }
