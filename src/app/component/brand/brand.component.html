@@ -18,7 +18,7 @@
         <li  [class]="getAllBrandClass()"  (click)="resetCurrentBrand()" routerLink="/cars">Tüm Markalar</li>
         <li (click)="SetCurrentBrand(brand)" 
         routerLink="/cars/brand/{{brand.id}}"
-         *ngFor="let brand of brands | brandFilterPipe:filterText"  [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>        
+         *ngFor="let brand of brands | brandFilterPipe:filterText"  [class]="getCurrentBrandClass(brand)">{{brand.brandName | uppercase }}</li>        
       </ul>
     </table>
    

@@ -28,6 +28,9 @@ import { PaymentSuccessComponent } from './component/payment-success/payment-suc
 import { BrandAddComponent } from './component/brand-add/brand-add.component';
 import { ColorAddComponent } from './component/color-add/color-add.component';
 import { CarAddComponent } from './component/car-add/car-add.component';
+import { BrandManagerComponent } from './component/brand-manager/brand-manager.component';
+import { BrandUpdateComponent } from './component/brand-update/brand-update.component';
+import { BrandDeleteComponent } from './component/brand-delete/brand-delete.component';
 
 
 
@@ -56,6 +59,9 @@ import { CarAddComponent } from './component/car-add/car-add.component';
     BrandAddComponent,
     ColorAddComponent,
     CarAddComponent,
+    BrandManagerComponent,
+    BrandUpdateComponent,
+    BrandDeleteComponent,
     
   
 

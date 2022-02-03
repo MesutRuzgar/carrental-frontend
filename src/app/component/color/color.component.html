@@ -16,7 +16,7 @@
             {{filterText}} Aranıyor
            </div>
         <li  [class]="getAllColorClass()"  (click)="resetCurrentColor()" routerLink="/cars">Tüm Renkler</li>
-        <li (click)="SetCurrentColor(color)" routerLink="/cars/color/{{color.id}}" *ngFor="let color of colors | colorFilterPipe:filterText" [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
+        <li (click)="SetCurrentColor(color)" routerLink="/cars/color/{{color.id}}" *ngFor="let color of colors | colorFilterPipe:filterText" [class]="getCurrentColorClass(color)">{{color.colorName | uppercase}}</li>
     </ul>
 </table>
 

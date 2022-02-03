@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-
 import { ToastrService } from 'ngx-toastr';
 import { BrandService } from 'src/app/services/brand.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-brand-add',
@@ -16,7 +16,7 @@ export class BrandAddComponent implements OnInit {
     private formBuilder:FormBuilder,
     private brandService:BrandService,
     private toastrService:ToastrService,
-    ) { }
+    private brandAddModal: MatDialogRef<BrandAddComponent>) { }
 
   ngOnInit(): void {
     this.createBrandAddForm();
@@ -26,17 +26,18 @@ export class BrandAddComponent implements OnInit {
       brandName:["",Validators.required],      
     })
     }
+    closeBrandAddModal() {
+      this.brandAddModal.close();
+    }
     add(){
       if(this.brandAddForm.valid){
         let brandModel = Object.assign({},this.brandAddForm.value)
-        this.brandService.add(brandModel).subscribe(response=>{
-      
+        this.brandService.add(brandModel).subscribe(response=>{      
         this.toastrService.success(response.message,"Başarılı") 
         },responseError=>{
-          if(responseError.error.ValidationErrors.length>0){          
-            for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-              this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage,"Doğrulama Hatası")            
-            }          
+          console.log(responseError)
+            if(responseError.error.success==false){          
+            this.toastrService.error(responseError.error.message,"Doğrulama Hatası")          
           }      
         })      
       }else{
