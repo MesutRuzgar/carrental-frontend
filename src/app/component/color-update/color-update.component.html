@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <div class="d-flex justify-content-between">
-            <h5>{{currentBrand.brandName | uppercase}} Markasını Güncelle</h5>
+            <h5>{{currentColor.colorName | uppercase}} Rengini Güncelle</h5>
         </div>
     </div>
     <div class="card-body">
@@ -9,24 +9,24 @@
             <div class="col-md-3">
                 <div class="row align-items-center">
                     <div class="col-md-7">
-                        <strong>Marka
+                        <strong>Renk
                             Kodu:</strong>
                     </div>
                     <div class="col-md-5">
-                        <input class="form-control text-center" [placeholder]="currentBrand.id" disabled />
+                        <input class="form-control text-center" [placeholder]="currentColor.id" disabled />
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="row align-items-center">
                     <div class="col-md-4">
-                        <strong class="float-end"><label for="brandName">Marka Adı:</label></strong>
+                        <strong class="float-end"><label for="colorName">Renk Adı:</label></strong>
                     </div>
                     <div class="col-md-8">
-                        <form [formGroup]="brandUpdateForm">
+                        <form [formGroup]="colorUpdateForm">
                             <div class="align-items-center">
-                                <input type="text" id="brandName" formControlName="brandName" class="form-control"
-                                    [placeholder]="currentBrand.brandName" />
+                                <input type="text" id="colorName" formControlName="colorName" class="form-control"
+                                    [placeholder]="currentColor.colorName" />
                             </div>
                         </form>
                     </div>

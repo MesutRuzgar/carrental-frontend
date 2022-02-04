@@ -5,6 +5,7 @@ import { CarImage } from 'src/app/models/carImage';
 import { CarService } from 'src/app/services/car.service';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/services/cart.service';
+import { CarImageService } from 'src/app/services/car-image.service';
 
 
 
@@ -14,16 +15,17 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./car-detail.component.css']
 })
 export class CarDetailComponent implements OnInit {
-  car:Car;
-  cardetail:Car;
+
+  carDetails:Car[];
   currentDetail:Car;
   carImages:CarImage[]=[];
-  imgUrl="https://localhost:44322";
+ 
 
   constructor(private carService:CarService,
     private activatedRoute:ActivatedRoute,   
     private toastrService:ToastrService,
-    private cartService:CartService) { }
+    private cartService:CartService,
+    private carImageService:CarImageService) { }
 
   ngOnInit(): void { 
     this.activatedRoute.params.subscribe(params=>{
@@ -31,25 +33,28 @@ export class CarDetailComponent implements OnInit {
       this.getByCarImage(params["carId"])      
     })   
     } 
-    getByCarId(carId:number){
-      this.carService.getCarById(carId).subscribe(result=>{
-        this.cardetail=result.data[0]
+
+    getByCarId(carId:number){      
+       this.carService.getCarById(carId).subscribe(response=>{
+        this.carDetails=response.data
+        
       })
     }
     getByCarImage(carId:number){
-      this.carService.getCarByImage(carId).subscribe(result=>{
-        this.carImages=result.data
+      this.carService.getCarByImage(carId).subscribe(response=>{
+        this.carImages=response.data
       })     
     }
-    getPath(path:string){
-      return this.imgUrl+path;
-    }
+    getImagePath(imagePath:string){ 
+      return this.carImageService.getImagePath(imagePath);
+     }
+   
     setCurrentDetail(car:Car){
     this.currentDetail=car;
     }
 
     addToCart(car:Car,rentDate:Date,returnDate:Date){
-      this.toastrService.success("Sepete eklendi.",car.carName)
+      this.toastrService.success("Sepete eklendi.",car.modelName)
       this.cartService.addToCart(car,rentDate,returnDate);
       }
       

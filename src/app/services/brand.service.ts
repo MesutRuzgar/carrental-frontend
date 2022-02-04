@@ -21,7 +21,7 @@ export class BrandService {
   add(brand:Brand):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl+"brands/add",brand)
   }
-  delete(brand: Brand): Observable<ResponseModel> {
+  delete(brand: Brand):Observable<ResponseModel> {
     let newPath = this.apiUrl + 'brands/delete'
     return this.httpClient.post<ResponseModel>(newPath, brand)
   }

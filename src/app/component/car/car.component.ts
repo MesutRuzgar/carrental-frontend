@@ -7,6 +7,7 @@ import { CarService } from 'src/app/services/car.service';
 import {Color} from 'src/app/models/color'
 import { BrandService } from 'src/app/services/brand.service';
 import { ColorService } from 'src/app/services/color.service';
+import { CarImageService } from 'src/app/services/car-image.service';
 
 
 
@@ -23,14 +24,12 @@ export class CarComponent implements OnInit {
   brands:Brand[]=[];
   colors:Color[]=[];
   brandId:number=0;
-  colorId:number=0;
-  imgUrl="https://localhost:44322";
-  defaultImage="/default.png";
+  colorId:number=0; 
   filterText="";
   dataLoaded=false;
 
   constructor(private carService:CarService,private activatedRoute:ActivatedRoute,
-    private brandService:BrandService,private colorService:ColorService,) { }
+    private brandService:BrandService,private colorService:ColorService,private carImageService:CarImageService) { }
 
   ngOnInit(): void {
     this.colorService.getColors().subscribe(params=>{
@@ -59,12 +58,12 @@ export class CarComponent implements OnInit {
   getCars(){
     this.carService.getCars().subscribe(response=>{
       this.cars=response.data;
-this.dataLoaded=true;
+      this.dataLoaded=true;
     })
   }
   getCarsByBrandId(brandId:number){
     this.carService.getCarsByBrandId(brandId).subscribe(response=>{
-      this.cars=response.data
+      this.cars=response.data;
       this.dataLoaded=true;
     })
   }
@@ -85,9 +84,10 @@ this.dataLoaded=true;
       this.cars=response.data
     })
   }
-  getPath(images:CarImage[]){    
-    return this.imgUrl+images[0].imagePath;
-  }
+  getImagePath(imagePath:string){ 
+    return this.carImageService.getImagePath(imagePath);
+   }
+ 
   getCarsWithBrandAndColor(){
     if(this.brandId == 0 && this.colorId ==0){
       this.getCars()

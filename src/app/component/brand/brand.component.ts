@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Brand } from 'src/app/models/brands';
 import { BrandService } from 'src/app/services/brand.service';
 
@@ -13,7 +14,8 @@ export class BrandComponent implements OnInit {
   currentBrand:Brand; 
   filterText="";
   dataLoaded=false;
-  constructor(private brandService:BrandService) { }
+  constructor(private brandService:BrandService,
+   private router:Router) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -48,5 +50,8 @@ getCurrentBrandClass(brand:Brand){
   }
   resetCurrentBrand() {
     this.currentBrand = {id:0, brandName:""};
+  }
+  goBrandManager(){
+    this.router.navigate(["brands/manager"])
   }
 }

@@ -19,9 +19,9 @@ export class RentalService {
     return this.httpClient.get<ListResponseModel<Rental>>(newPath);
   }
 
-  getCheckRentDate(carId:number,rentDate:Date,returnDate:Date):Observable<SingleResponseModel>{
+  getCheckRentDate(carId:number,rentDate:Date,returnDate:Date):Observable<SingleResponseModel<boolean>>{
     let newPath=this.apiUrl+"rentals/getcheckrentdate?carId="+carId+"&rentDate="+rentDate+"&returnDate="+returnDate;
-    return this.httpClient.get<SingleResponseModel>(newPath);
+    return this.httpClient.get<SingleResponseModel<boolean>>(newPath);
   }
   
 }

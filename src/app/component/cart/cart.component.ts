@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CartItem } from 'src/app/models/cartItem';
+import { CarImageService } from 'src/app/services/car-image.service';
 import { CartService } from 'src/app/services/cart.service';
 
 
@@ -16,9 +17,10 @@ export class CartComponent implements OnInit {
   cartItems:CartItem[]=[];  
   returnDate:Date;
   rentDate:Date;
-  imgUrl="https://localhost:44322"; 
+  
 
-  constructor(private cartService:CartService) { }
+  constructor(private cartService:CartService,
+    private carImageService:CarImageService) { }
 
   ngOnInit(): void {
     this.getCart();
@@ -34,9 +36,9 @@ export class CartComponent implements OnInit {
   goToPayment():void{
     
   }
-  getPath(path:string){
-    return this.imgUrl+path;
-  }
+  getImagePath(imagePath:string){ 
+    return this.carImageService.getImagePath(imagePath);
+   }
  
   calculateRent(returnDate:Date,rentDate:Date):number{
    let date1 = new Date(returnDate);

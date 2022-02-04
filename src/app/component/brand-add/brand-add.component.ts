@@ -34,16 +34,21 @@ export class BrandAddComponent implements OnInit {
         let brandModel = Object.assign({},this.brandAddForm.value)
         this.brandService.add(brandModel).subscribe(response=>{      
         this.toastrService.success(response.message,"Başarılı") 
+        this.closeBrandAddModal(); 
         },responseError=>{
-          console.log(responseError)
-            if(responseError.error.success==false){          
-            this.toastrService.error(responseError.error.message,"Doğrulama Hatası")          
+          if(responseError.error.success==false){
+            this.toastrService.error(responseError.error.message,"İşlem sırasında hata oluştu.")      
+          }
+          else if(responseError.error.ValidationErrors.length>0){          
+            for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+              this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage,"Doğrulama Hatası")            
+            }          
           }      
         })      
       }else{
         this.toastrService.error("Formunuz eksik","Lütfen gerekli alanları doldurunuz");
-      }
-    
+      }    
     }
+    
     
 }

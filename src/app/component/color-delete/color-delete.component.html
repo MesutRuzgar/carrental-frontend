@@ -1,0 +1,15 @@
+<div class="card-header">
+    <div class="d-flex justify-content-between">
+        <h5>{{deletedColor.colorName |uppercase}} Rengini Sil</h5>
+    </div>
+
+</div>
+<div class="card-body">
+    <strong>{{deletedColor.id}}</strong> Kod numaralı <strong>{{deletedColor.colorName | uppercase}}</strong> isimli rengi silmek istediğinizden emin misiniz?
+    <div class="row mt-3">
+        <div class="d-flex justify-content-end">
+            <button (click)="delete(deletedColor)" type="button" class="btn btn-success me-2">Sil</button>
+            <button (click)="closeColorDeleteModal()" type="button" class="btn btn-danger">İptal</button>
+        </div>
+    </div>
+</div>

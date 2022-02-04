@@ -11,8 +11,8 @@ export class CreditCardService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getCheckCreditCard(cardHolder:string,cardNumber:string,cvv:string,expirationMonth:string,expirationYear:string):Observable<SingleResponseModel>{
+  getCheckCreditCard(cardHolder:string,cardNumber:string,cvv:string,expirationMonth:string,expirationYear:string):Observable<SingleResponseModel<boolean>>{
     let newPath=this.apiUrl+"creditcards/getcheckcreditcard?cardHolder="+cardHolder+"&cardNumber="+cardNumber+"&cvv="+cvv+"&expirationMonth="+expirationMonth+"&expirationYear="+expirationYear;
-    return this.httpClient.get<SingleResponseModel>(newPath);
+    return this.httpClient.get<SingleResponseModel<boolean>>(newPath);
   }  
 }

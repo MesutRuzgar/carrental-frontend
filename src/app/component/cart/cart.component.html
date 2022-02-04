@@ -18,11 +18,11 @@
                     <div *ngFor="let cartItem of cartItems"  class="cart_items">                        
                         <ul  class="cart_list">
                             <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img class="image_css"  [src]="getPath(cartItem.car.carImage[0].imagePath)" ></div>                                
+                                <div class="cart_item_image"><img class="image_css"  [src]="getImagePath(cartItem.car.carImage[0].imagePath)" ></div>                                
                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                     <div class="cart_item_name cart_info_col">
                                         <div class="cart_item_title">Araç</div>
-                                        <div  class="cart_item_text">{{cartItem.car.carName}}</div>
+                                        <div  class="cart_item_text">{{cartItem.car.modelName}}</div>
                                     </div>
                                     <div class="cart_item_color cart_info_col">
                                         <div class="cart_item_title">Kiralama Tarihi</div>

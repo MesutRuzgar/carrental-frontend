@@ -14,6 +14,7 @@ import { BrandDeleteComponent } from '../brand-delete/brand-delete.component';
 export class BrandManagerComponent implements OnInit {
 
   brands:Brand[]=[];
+  filterText="";
   
   constructor(private brandService:BrandService,private dialog: MatDialog) { }
 

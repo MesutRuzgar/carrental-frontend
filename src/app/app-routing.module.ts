@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BrandAddComponent } from './component/brand-add/brand-add.component';
+
 import { BrandManagerComponent } from './component/brand-manager/brand-manager.component';
 import { BrandComponent } from './component/brand/brand.component';
 import { CarAddComponent } from './component/car-add/car-add.component';
+import { CarDeleteComponent } from './component/car-delete/car-delete.component';
 import { CarDetailComponent } from './component/car-detail/car-detail.component';
+import { CarManagerComponent } from './component/car-manager/car-manager.component';
 import { CarComponent } from './component/car/car.component';
 import { CartComponent } from './component/cart/cart.component';
 import { ColorAddComponent } from './component/color-add/color-add.component';
+import { ColorDeleteComponent } from './component/color-delete/color-delete.component';
+import { ColorManagerComponent } from './component/color-manager/color-manager.component';
 import { ColorComponent } from './component/color/color.component';
 import { PaymentSuccessComponent } from './component/payment-success/payment-success.component';
 import { PaymentComponent } from './component/payment/payment.component';
@@ -27,7 +31,8 @@ const routes: Routes = [
   {path:"colors/add",component:ColorAddComponent},
   {path:"cars/add",component:CarAddComponent},
   {path:"brands/manager",component:BrandManagerComponent},
-
+  {path:"colors/manager",component:ColorManagerComponent},
+  {path:"cars/manager",component:CarManagerComponent},
   
 
 ];

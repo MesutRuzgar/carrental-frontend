@@ -23,7 +23,7 @@
 
               <div class="mb-3">
             <label for="filterText" class="form-label">Araba Ara</label>
-            <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Aramak istediğiniz araba ismini yazınız">
+            <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Aramak istediğiniz araba modelini yazınız">
           </div>
         <div *ngIf="filterText.length>=2" class="alert alert-warning">
         {{filterText}} Aranıyor
@@ -32,21 +32,21 @@
   <div class="row">
     <div  class="col-lg-4 col-md-6 p-3 mb-5 bg-body rounded " *ngFor="let car of cars | carFilterPipe:filterText "  >
       <div class="card border-0 mb-3" style="width: 18rem;">
-        <img src="car-image" *ngIf="car.carImage.length==0" src="{{imgUrl}}{{defaultImage}}">
-        <img *ngIf="car.carImage.length!=0" class="car-image" [src]="getPath(car.carImage)" class="card-img-top" alt="Image" width="300" height="200">
+        <!-- <img src="car-image" *ngIf="car.carImage.length==0" src="{{imgUrl}}{{defaultImage}}"> -->
+        <img *ngIf="car.carImage.length!=0" class="car-image" [src]="getImagePath(car.carImage[0].imagePath)" class="card-img-top" alt="Image" width="300" height="200">
         <div class="card-body text-center">
           <h4>
-            <a class="card-title text-decoration-none h5" style="color:#007bff;"><strong>{{car.carName}}</strong> </a>
+            <a class="card-title text-decoration-none h5" style="color:#007bff;"><strong>{{car.modelName | uppercase}}</strong> </a>
           </h4>
         </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <span class="float-start">Marka</span>
-              <span class="float-end">{{car.brandName}}</span>
+              <span class="float-end">{{car.brandName | uppercase}}</span>
             </li>
             <li class="list-group-item">
               <span class="float-start">Renk</span>
-              <span class="float-end">{{car.colorName}}</span>
+              <span class="float-end">{{car.colorName | uppercase}}</span>
             </li>
             <li class="list-group-item">
               <span class="float-start">Model</span>

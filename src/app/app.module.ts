@@ -31,6 +31,12 @@ import { CarAddComponent } from './component/car-add/car-add.component';
 import { BrandManagerComponent } from './component/brand-manager/brand-manager.component';
 import { BrandUpdateComponent } from './component/brand-update/brand-update.component';
 import { BrandDeleteComponent } from './component/brand-delete/brand-delete.component';
+import { ColorDeleteComponent } from './component/color-delete/color-delete.component';
+import { ColorUpdateComponent } from './component/color-update/color-update.component';
+import { ColorManagerComponent } from './component/color-manager/color-manager.component';
+import { CarDeleteComponent } from './component/car-delete/car-delete.component';
+import { CarUpdateComponent } from './component/car-update/car-update.component';
+import { CarManagerComponent } from './component/car-manager/car-manager.component';
 
 
 
@@ -62,6 +68,12 @@ import { BrandDeleteComponent } from './component/brand-delete/brand-delete.comp
     BrandManagerComponent,
     BrandUpdateComponent,
     BrandDeleteComponent,
+    ColorDeleteComponent,
+    ColorUpdateComponent,
+    ColorManagerComponent,
+    CarDeleteComponent,
+    CarUpdateComponent,
+    CarManagerComponent,
     
   
 

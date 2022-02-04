@@ -21,7 +21,7 @@ export class CartService {
       carItem.rentDate=rentDate;
       carItem.returnDate=returnDate;
       CartItems.push(carItem)
-      this.toastrService.success("Sepete eklendi.",car.carName);
+      this.toastrService.success("Sepete eklendi.",car.modelName);
       this.toastrService.success("Ödeme için sepetinize gidiniz. "); 
       
     }

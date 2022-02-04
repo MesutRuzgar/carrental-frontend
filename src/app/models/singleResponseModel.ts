@@ -1,5 +1,5 @@
 import { ResponseModel } from "./responseModule";
 
-export interface SingleResponseModel extends ResponseModel{
- data:boolean
+export interface SingleResponseModel<T> extends ResponseModel{
+ data:T;
 }

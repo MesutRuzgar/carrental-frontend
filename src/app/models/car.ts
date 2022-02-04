@@ -2,7 +2,7 @@ import { CarImage } from "./carImage";
 
 export interface Car{
     carId:number;
-    carName:string;
+    modelName:string;
     brandId:number;
     colorId:number;
     brandName:string;

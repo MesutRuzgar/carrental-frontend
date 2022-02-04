@@ -10,21 +10,21 @@
                 <h5 class="modal-title" id="exampleModalLabel">Araç Kiralama Detayları</h5>       
                 </div>
                      <div class="modal-body">
-                    <img [src]="getPath(carImage.imagePath)" class="d-block w-100" width="450" height="250" alt="Image"/>
+                    <img [src]="getPath(carImage?.imagePath)" class="d-block w-100" width="450" height="250" alt="Image"/>
                      </div>
             <div class="modal-body">
             <div class="row">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">        
-                    <strong>Araç Markası: </strong><span class="float-end">{{cardetail.brandName}}</span>
+                    <strong>Araç Markası: </strong><span class="float-end">{{cardetail?.brandName | uppercase}}</span>
                     </li>
                 <li class="list-group-item">        
-                    <strong>Araç Rengi: </strong> <span class="float-end">{{cardetail.colorName}}</span>
+                    <strong>Araç Rengi: </strong> <span class="float-end">{{cardetail?.colorName | uppercase}}</span>
                 </li>
                     <li class="list-group-item">        
-                        <strong>Araç Model Yılı: </strong><span class="float-end">{{cardetail.modelYear}}</span>
+                        <strong>Araç Model Yılı: </strong><span class="float-end">{{cardetail?.modelYear}}</span>
                     </li>              
-                    <p class="card-text text-center h3 mt-3 price">{{cardetail.dailyPrice }} ₺/Günlük</p>
+                    <p class="card-text text-center h3 mt-3 price">{{cardetail?.dailyPrice }} ₺/Günlük</p>
                 </ul>
             </div><br>
             <div class="row">
