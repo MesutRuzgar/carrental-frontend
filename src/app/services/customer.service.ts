@@ -10,7 +10,7 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerDetailDtoService {  
+export class CustomerService {  
   apiUrl="https://localhost:44322/api/customers/"
 
   constructor(private httpClient:HttpClient) { }
@@ -27,7 +27,6 @@ export class CustomerDetailDtoService {
     let newPath = this.apiUrl + 'getbyuserid?userid=' + userId;
     return this.httpClient.get<SingleResponseModel<Customer>>(newPath);
   }
-
   addCustomer(customer: Customer): Observable<SingleResponseModel<number>> {
     let newPath = this.apiUrl + 'add';
     return this.httpClient.post<SingleResponseModel<number>>(newPath, customer);

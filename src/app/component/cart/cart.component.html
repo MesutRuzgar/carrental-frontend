@@ -50,8 +50,9 @@
                             <div class="order_total_amount">{{calculateTotalAmount() | currency:"":""}}₺</div>
                         </div>
                     </div>
-                        <div  class="cart_buttons"> <button routerLink="" type="button" class="button cart_button_clear">Ana Sayfa</button>
-                         <button type="button" routerLink="/payment" (click)="goToPayment()"  class="button cart_button_checkout">Ödeme</button> 
+                        <div  class="cart_buttons">
+                         <button routerLink="" type="button" class="button cart_button_clear">Ana Sayfa</button>
+                         <button *ngIf="cartItems.length>0" type="button" routerLink="/payment" (click)="goToPayment()"  class="button cart_button_checkout" >Sepeti Onayla</button> 
                         </div>
                 </div>
             </div>

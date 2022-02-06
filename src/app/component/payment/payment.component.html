@@ -9,7 +9,7 @@
             </div><br>
             <select  class=" form-select" aria-label="Default select example">
               <option selected value="0">Kayıtlı kredi kartlarım</option>
-              <option  value=""></option>
+              <option   value="{{currentUser.id}}"></option>
             </select>
             <div class="card-body">
               <form [formGroup]="paymentForm">
@@ -69,7 +69,7 @@
             <div class="card-footer">
               <li  class="list-group border border-light">
                 <span class="d-flex flex-column float-end">
-                  <a (click)="payment()"  class="btn btn-success">Ödeme Yap</a>                 
+                  <a  (click)="payment()"  class="btn btn-success">Ödeme Yap</a>                 
                 </span>
             </li>
             </div>
