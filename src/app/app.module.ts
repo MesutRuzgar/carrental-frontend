@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,6 +8,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule  } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner"; 
+
 
 
 import { CarComponent } from './component/car/car.component';
@@ -37,7 +39,11 @@ import { ColorManagerComponent } from './component/color-manager/color-manager.c
 import { CarDeleteComponent } from './component/car-delete/car-delete.component';
 import { CarUpdateComponent } from './component/car-update/car-update.component';
 import { CarManagerComponent } from './component/car-manager/car-manager.component';
-
+import { LoginComponent } from './component/login/login.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { RegisterComponent } from './component/register/register.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { ProfileComponent } from './component/profile/profile.component'; 
 
 
 
@@ -74,6 +80,9 @@ import { CarManagerComponent } from './component/car-manager/car-manager.compone
     CarDeleteComponent,
     CarUpdateComponent,
     CarManagerComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
     
   
 
@@ -88,13 +97,19 @@ import { CarManagerComponent } from './component/car-manager/car-manager.compone
     NgbModule,
     MatDialogModule,    
     ReactiveFormsModule,
+    NgxSpinnerModule,
+
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     })
    
     
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true},
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CartItem } from 'src/app/models/cartItem';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CartService } from 'src/app/services/cart.service';
+import { DateTimeService } from 'src/app/services/date-time.service';
 
 
 
@@ -17,10 +18,11 @@ export class CartComponent implements OnInit {
   cartItems:CartItem[]=[];  
   returnDate:Date;
   rentDate:Date;
-  
+
 
   constructor(private cartService:CartService,
-    private carImageService:CarImageService) { }
+    private carImageService:CarImageService,
+    private dateTimeService:DateTimeService) { }
 
   ngOnInit(): void {
     this.getCart();
@@ -39,19 +41,20 @@ export class CartComponent implements OnInit {
   getImagePath(imagePath:string){ 
     return this.carImageService.getImagePath(imagePath);
    }
- 
-  calculateRent(returnDate:Date,rentDate:Date):number{
-   let date1 = new Date(returnDate);
-   let date2 = new Date(rentDate);
-   var kalangun = date1.getTime() - date2.getTime();
-   var numberOfDays = Math.ceil(kalangun / (1000*3600*24))
-   return numberOfDays;
-  }
- 
+
+ calculateRent():number{
+  let totalRentalPeriod: number = 0;
+  this.cartItems.forEach(cartItem=>{
+    let rentalPeriod:number = this.dateTimeService.calculateRent(cartItem.returnDate,cartItem.rentDate);
+    totalRentalPeriod += rentalPeriod;
+  });
+  return totalRentalPeriod;
+  
+ }  
   calculateTotalAmount():number{
     let totalAmount: number = 0;
     this.cartItems.forEach(cartItem=>{
-      let calculateDay = this.calculateRent(cartItem.returnDate,cartItem.rentDate)
+      let calculateDay = this.calculateRent()
       let amount = cartItem.car.dailyPrice * calculateDay
       totalAmount += amount;
     })

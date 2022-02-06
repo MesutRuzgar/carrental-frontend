@@ -1,26 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Rent A Car</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="">Ana Sayfa</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
+        
        <app-cart-summary></app-cart-summary>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
+        
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="">
+        <button type="button" *ngIf="!userLoggedIn" routerLink="/login" class="btn btn-success">Giriş Yap</button>
+        <button type="button" *ngIf="!userLoggedIn" routerLink="/register" class="btn btn-primary">Kayıt Ol</button>
+      </div>
+      <div class="dropdown" *ngIf="userLoggedIn">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <!-- <img width="30px" height="30px" class="rounded-circle" src="https://randomuser.me/api/portraits/men/32.jpg" /> -->
+          {{currentUser.name }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="btn dropdown-item" routerLink="/profile" >Bilgilerim</a></li>
+          <li><a class="btn dropdown-item" >Siparişlerim</a></li>
+          <li><a class="btn dropdown-item" >Şifremi Değiştir</a></li>
+          <li><a class="btn dropdown-item" (click)="logOut()">Çıkış Yap</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>

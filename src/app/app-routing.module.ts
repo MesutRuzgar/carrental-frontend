@@ -13,8 +13,11 @@ import { ColorAddComponent } from './component/color-add/color-add.component';
 import { ColorDeleteComponent } from './component/color-delete/color-delete.component';
 import { ColorManagerComponent } from './component/color-manager/color-manager.component';
 import { ColorComponent } from './component/color/color.component';
+import { LoginComponent } from './component/login/login.component';
 import { PaymentSuccessComponent } from './component/payment-success/payment-success.component';
 import { PaymentComponent } from './component/payment/payment.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { RegisterComponent } from './component/register/register.component';
 
 
 const routes: Routes = [
@@ -33,6 +36,9 @@ const routes: Routes = [
   {path:"brands/manager",component:BrandManagerComponent},
   {path:"colors/manager",component:ColorManagerComponent},
   {path:"cars/manager",component:CarManagerComponent},
+  {path:"login",component:LoginComponent},
+  {path:"register",component:RegisterComponent},
+  {path:"profile",component:ProfileComponent},
   
 
 ];

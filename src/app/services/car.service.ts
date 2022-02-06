@@ -14,6 +14,7 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 export class CarService {
   apiUrl="https://localhost:44322/api/"
 
+
   constructor(private httpClient:HttpClient) { }
   getCars():Observable<ListResponseModel<Car>>{
     let newPath=this.apiUrl+"cars/getcardetails"
@@ -51,5 +52,5 @@ export class CarService {
     let newPath = this.apiUrl + "Cars/update";
     return this.httpClient.post<ResponseModel>(newPath, car);
   }
-
+  
 }
