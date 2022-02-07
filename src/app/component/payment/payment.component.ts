@@ -11,6 +11,9 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { UserForLogin } from 'src/app/models/userForLogin';
 import { AuthService } from 'src/app/services/auth.service';
 import { Customer } from 'src/app/models/customer';
+import { Rental } from 'src/app/models/rental';
+import { RentalService } from 'src/app/services/rental.service';
+import { RentModel } from 'src/app/models/rentModel';
 
 @Component({
   selector: 'app-payment',
@@ -24,7 +27,10 @@ export class PaymentComponent implements OnInit {
   saveCreditCardForm:FormGroup;
   paymentForm:FormGroup;
   rememberMe:boolean=false; 
-  customerId:number; 
+  customerId:number;
+  rentals:RentModel;
+  
+  
  
 
   constructor(
@@ -36,7 +42,8 @@ export class PaymentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private router:Router,
-    private authService:AuthService) { }
+    private authService:AuthService,
+    private rentalService:RentalService) { }
 
   ngOnInit(): void {
    this.getCart();
@@ -66,13 +73,19 @@ export class PaymentComponent implements OnInit {
       .subscribe(response=>{        
         this.sonuc=response.data          
       if(this.sonuc){
-        this.toastrService.success("Ödeme Başarılı.");
+        this.toastrService.success("Ödeme Başarılı."); 
+        this.getCustomerId().then(customerId => {  
+         let rentals:RentModel= new RentModel;                
+         rentals.rentals=this.createRentals(customerId);
+         this.rentalService.rent(rentals).subscribe(response=>{
+           this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.")
+         });       
+        })       
         this.router.navigate(["/payment-success"])
                      
       }
       else{       
-        this.toastrService.error("Lütfen kart bilgilerinizi kontrol ediniz.","Kart bilgileriniz onaylanmadı.");
-       
+        this.toastrService.error("Lütfen kart bilgilerinizi kontrol ediniz.","Kart bilgileriniz onaylanmadı.");       
       }
       })      
     }
@@ -102,11 +115,11 @@ export class PaymentComponent implements OnInit {
   getCustomerId(): Promise<number> {
     return new Promise<number>((methodResolve) => {
       this.customerService.getCustomerByUserId(this.currentUser.id).subscribe(successResult => {
-        methodResolve(successResult.data.id);
+        methodResolve(successResult.data.id);      
       }, () => {  //If the user is not a customer, save it as a customer
         let addedCustomer = new Customer;
         addedCustomer.userId = this.currentUser.id;
-        addedCustomer.companyName = "";
+        addedCustomer.companyName = " ";
         this.customerService.addCustomer(addedCustomer).subscribe(successAddedResult => {
           methodResolve(successAddedResult.data);
         })
@@ -114,18 +127,21 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  // createRentals(customerId: number): Rental[] {
-  //   let rentals: Rental[] = [];
-  //   this.cartItems.forEach(cartItem => {
-  //     let rental: Rental = new Rental;
-  //     rental.carId = cartItem.car.carId;
-  //     rental.customerId = customerId;
-  //     rental.rentDate = cartItem.rentDate;
-  //     rental.returnDate = cartItem.returnDate;      
-  //     rentals.push(rental);
-  //   });
-  //   return rentals;
-  // }
+  createRentals(customerId: number):Rental[]{
+    let rentals: Rental[]=[];
+    this.cartItems.forEach(cartItem => {
+      let rental: Rental = new Rental ;
+      rental.carId = cartItem.car.carId;
+      rental.customerId = customerId;
+      rental.rentDate = cartItem.rentDate;
+      rental.returnDate = cartItem.returnDate; 
+      rental.dailyPrice=cartItem.car.dailyPrice;   
+      console.log(cartItem.rentDate)  
+      rentals.push(rental);
+    
+    });
+    return rentals;
+  }
 
   calculateRent():number{
     let totalRentalPeriod: number = 0;

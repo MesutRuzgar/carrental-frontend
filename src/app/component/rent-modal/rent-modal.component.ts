@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
+import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CartService } from 'src/app/services/cart.service';
 import { RentalService } from 'src/app/services/rental.service';
@@ -21,14 +22,14 @@ export class RentModalComponent implements OnInit {
   returnDate:Date;
   rentDate:Date;
   toDayDate:Date;
-  imgUrl="https://localhost:44322";
+ 
 
   constructor(private carService:CarService,
     private activatedRoute:ActivatedRoute,   
     private toastrService:ToastrService,
     private cartService:CartService,
     private rentalService:RentalService,
-    
+    private carImageService:CarImageService,
     ) { }
 
     ngOnInit(): void { 
@@ -48,9 +49,9 @@ export class RentModalComponent implements OnInit {
       this.carImage=result.data[0]
     })     
   }
-  getPath(path:string){
-    return this.imgUrl+path;
-  }
+  getImagePath(imagePath:string){ 
+    return this.carImageService.getImagePath(imagePath);
+   }
  
   
   checkDate(carId:number,rentDate:Date,returnDate:Date){      
