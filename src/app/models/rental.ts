@@ -7,5 +7,6 @@ export class Rental{
     dailyPrice:number;
     rentDate:Date;
     returnDate:Date;
+    totalAmount:number;
    
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Customer } from '../models/customer';
 import { CustomerDetailDto } from '../models/customerDetailDto';
 import { ListResponseModel } from '../models/listResponseModel';
+import { ResponseModel } from '../models/responseModule';
 import { SingleResponseModel } from '../models/singleResponseModel';
 
 
@@ -31,4 +32,9 @@ export class CustomerService {
     let newPath = this.apiUrl + 'add';
     return this.httpClient.post<SingleResponseModel<number>>(newPath, customer);
   }
+  update(customer:Customer): Observable<ResponseModel>{
+    let newPath=this.apiUrl+'update'
+    return this.httpClient.post<ResponseModel>(newPath,customer)
+  }
+  
 }

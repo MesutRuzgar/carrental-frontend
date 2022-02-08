@@ -80,7 +80,8 @@ export class PaymentComponent implements OnInit {
                 carId:cartItem.car.carId,
                 rentDate:cartItem.rentDate,
                 returnDate:cartItem.returnDate,
-                customerId:customerId
+                customerId:customerId,
+                totalAmount : this.calculateTotalAmount()
               }; 
               this.rentalService.rent(rent).subscribe(response=>{   
                 this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.")             
@@ -126,7 +127,7 @@ export class PaymentComponent implements OnInit {
       }, () => {  //If the user is not a customer, save it as a customer
         let addedCustomer = new Customer;
         addedCustomer.userId = this.currentUser.id;
-        addedCustomer.companyName = " ";
+        addedCustomer.companyName = " Rent A Car ";
         this.customerService.addCustomer(addedCustomer).subscribe(successAddedResult => {
           methodResolve(successAddedResult.data);
         })
@@ -141,7 +142,8 @@ export class PaymentComponent implements OnInit {
         carId : cartItem.car.carId,
         customerId : customerId,
         rentDate : cartItem.rentDate,
-        returnDate : cartItem.returnDate   
+        returnDate : cartItem.returnDate,
+        totalAmount : this.calculateTotalAmount()   
       };            
       rentals.push(rental);    
     });
@@ -169,6 +171,5 @@ export class PaymentComponent implements OnInit {
     getCart(){
       this.cartItems=this.cartService.list();     
     }
-
     
 }

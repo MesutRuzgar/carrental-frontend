@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
       }
       },responseError=>{    
         this.toastrService.error(responseError.error,"Kayıt başarısız!");
-        console.log(responseError)        
+               
       })
     }
   }

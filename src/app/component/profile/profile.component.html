@@ -10,44 +10,71 @@
                             d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                     </svg>
                 </div>
-                <div class="card-footer text-center d-grid gap-2">
+                <!-- <div class="card-footer text-center d-grid gap-2">
                     <button class="btn btn-success" disabled>Resmi değiştir</button>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="col-md-4"><br>
             <div class="row card">
-                <div class="card-header text-center" >
-                    Bilgilerim</div>
+                <div class="card-header bg-warning bg-gradient text-center" >
+                    Kullanıcı Bilgilerim</div>
                 <div class="card-body">
-                    <div class="row">
+                    <div  class="row">
                         <div class="col-md-5  text-end">
                             <strong>E-mail:</strong>
                         </div>
                         <div class="col-md-7">
-                            <p>{{currentUser.email}}</p>                            
+                            <p>{{users?.email}}</p>                            
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-5 text-end">
-                            <strong>Ad-Soyad:</strong>
+                            <strong>Ad:</strong>
                         </div>
                         <div class="col-md-7">
-                            <p>{{currentUser.name}}</p>
+                            <p>{{users?.firstName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 text-end">
+                            <strong>SoyAd:</strong>
+                        </div>
+                        <div class="col-md-7">
+                            <p>{{users?.lastName}}</p>
                         </div>
                     </div><br>
-                    <div class="card-footer text-center d-grid gap-2">
-                   
+                    <div class="card-footer text-center d-grid gap-2">                   
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#userUpdate">Bilgileri Güncelle</button>
                     <button class="btn btn-success" disabled>Şifre Değiştir</button></div></div>
                 </div>
-            </div>   
-  <!-- Modal -->
+            </div> 
+            <!-- COMPANY DETAIL -->
+            <div class="col-md-4"><br>
+                <div class="row card">
+                    <div class="card-header bg-warning bg-gradient text-center" >
+                        Şirket Bilgilerim</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5  text-end">
+                                <strong>Şirket İsmi:</strong>
+                            </div>
+                            <div class="col-md-7">
+                                <p>{{customers?.companyName}}</p>                            
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer text-center d-grid gap-2">                   
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#companyUpdate">Bilgileri Güncelle</button>
+                      
+                    </div>
+                </div>  
+  <!-- USER UPDATE Modal -->
   <div class="modal fade" id="userUpdate" tabindex="-1" aria-labelledby="userUpdateLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="userUpdateLabel">Kullanıcı Güncelleme Detayları</h5>
+          <h5 class="modal-title" id="userUpdateLabel">Şirket Bilgileri Güncelleme Detayları</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -57,23 +84,22 @@
                         <div class="form-floating">
                             <input formControlName="firstName" type="text" class="form-control"
                                 id="updatefirstname" placeholder="Ad">
-                            <label for="signinemail">Ad</label>
+                            <label >Ad</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input formControlName="lastName" type="text" class="form-control"
                                 id="updatelastname" placeholder="Soyad">
-                            <label for="signinemail">Soyad</label>                            
+                                <label >Soyad</label>                            
                         </div><br>
                      </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <input formControlName="email" type="email" class="form-control"
-                                        id="updateemail" laceholder="E-postpa">
-                                        
-                                    <label for="signinemail">E-posta</label>                            
+                                        id="updateemail" laceholder="E-postpa">                                        
+                                        <label >E-posta</label>                            
                                 </div>
                             </div>
                         </div>                  
@@ -82,12 +108,34 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">İptal</button>
-          <button type="button"  class="btn btn-success">Kaydet</button>
+          <button type="button" (click)="updateProfile()"  class="btn btn-success">Kaydet</button>
         </div>
       </div>
     </div>
   </div>
-                           
+ <!-- COMPANY UPDATE Modal -->
+  <div class="modal fade" id="companyUpdate" tabindex="-1" aria-labelledby="companyUpdateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userUpdateLabel">Şirket Bilgileri Güncelleme Detayları</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="updateCompanyForm">                      
+                    <div class="form-floating">
+                        <input formControlName="companyName" type="text" class="form-control"  id="updatecompanyname" laceholder="E-postpa">                                        
+                            <label for="signinemail">Şirket İsmi</label>                            
+                     </div>          
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">İptal</button>
+          <button type="button"  class="btn btn-success" (click)="updateCompany()">Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>            
               <!--   <div class="card-body">
                     <form [formGroup]="updateProfileForm">
                         <div class="row">
