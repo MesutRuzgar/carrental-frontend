@@ -28,7 +28,7 @@ export class PaymentComponent implements OnInit {
   paymentForm:FormGroup;
   rememberMe:boolean=false; 
   customerId:number;
-  rentals:RentModel;
+ 
   
   
  
@@ -74,12 +74,19 @@ export class PaymentComponent implements OnInit {
         this.sonuc=response.data          
       if(this.sonuc){
         this.toastrService.success("Ödeme Başarılı."); 
-        this.getCustomerId().then(customerId => {  
-         let rentals:RentModel= new RentModel;                
-         rentals.rentals=this.createRentals(customerId);
-         this.rentalService.rent(rentals).subscribe(response=>{
-           this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.")
-         });       
+        this.getCustomerId().then(customerId => {   
+            this.cartItems.forEach(cartItem=>{
+              let rent : RentModel={
+                carId:cartItem.car.carId,
+                rentDate:cartItem.rentDate,
+                returnDate:cartItem.returnDate,
+                customerId:customerId
+              }; 
+              this.rentalService.rent(rent).subscribe(response=>{   
+                this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.")             
+            })          
+         });  
+                         
         })       
         this.router.navigate(["/payment-success"])
                      
@@ -127,18 +134,16 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  createRentals(customerId: number):Rental[]{
-    let rentals: Rental[]=[];
+  createRentals(customerId: number){
+   let rentals: RentModel[]=[];    
     this.cartItems.forEach(cartItem => {
-      let rental: Rental = new Rental ;
-      rental.carId = cartItem.car.carId;
-      rental.customerId = customerId;
-      rental.rentDate = cartItem.rentDate;
-      rental.returnDate = cartItem.returnDate; 
-      rental.dailyPrice=cartItem.car.dailyPrice;   
-      console.log(cartItem.rentDate)  
-      rentals.push(rental);
-    
+      let rental: RentModel={        
+        carId : cartItem.car.carId,
+        customerId : customerId,
+        rentDate : cartItem.rentDate,
+        returnDate : cartItem.returnDate   
+      };            
+      rentals.push(rental);    
     });
     return rentals;
   }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Rental } from '../models/rental';
 import { RentModel } from '../models/rentModel';
-
+import { ResponseModel } from '../models/responseModule';
 import { SingleResponseModel } from '../models/singleResponseModel';
 
 
@@ -25,9 +25,9 @@ export class RentalService {
     let newPath=this.apiUrl+"rentals/getcheckrentdate?carId="+carId+"&rentDate="+rentDate+"&returnDate="+returnDate;
     return this.httpClient.get<SingleResponseModel<boolean>>(newPath);
   }
-  rent(rent:RentModel):Observable<SingleResponseModel<number>>{
+  rent(rent:RentModel):Observable<ResponseModel>{
     let newPath = this.apiUrl + 'rentals/rent';
-    return this.httpClient.post<SingleResponseModel<number>>(newPath,rent);
+    return this.httpClient.post<ResponseModel>(newPath,rent);
   }
   
 }

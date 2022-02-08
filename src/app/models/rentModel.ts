@@ -1,7 +1,9 @@
-import { Rental } from "./rental";
 
 export class RentModel {
-   
-    rentals:Rental[];
+   carId:number;
+   customerId:number;
+   rentDate:Date;
+   returnDate:Date;
+  
    
   }
