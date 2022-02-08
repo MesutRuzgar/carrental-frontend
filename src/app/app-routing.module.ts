@@ -16,6 +16,7 @@ import { PaymentSuccessComponent } from './component/payment-success/payment-suc
 import { PaymentComponent } from './component/payment/payment.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { RegisterComponent } from './component/register/register.component';
+import { UserRentalsDetailsComponent } from './component/user-rentals-details/user-rentals-details.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"profile",component:ProfileComponent},
+  {path:"user-rental-detail",component:UserRentalsDetailsComponent},
   
 
 ];

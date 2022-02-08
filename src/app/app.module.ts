@@ -43,7 +43,8 @@ import { LoginComponent } from './component/login/login.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { RegisterComponent } from './component/register/register.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { ProfileComponent } from './component/profile/profile.component'; 
+import { ProfileComponent } from './component/profile/profile.component';
+import { UserRentalsDetailsComponent } from './component/user-rentals-details/user-rentals-details.component'; 
 
 
 
@@ -83,6 +84,7 @@ import { ProfileComponent } from './component/profile/profile.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    UserRentalsDetailsComponent,
     
   
 
