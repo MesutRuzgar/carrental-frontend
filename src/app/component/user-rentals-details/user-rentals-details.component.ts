@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Car } from 'src/app/models/car';
+import { CarImage } from 'src/app/models/carImage';
 import { Rental } from 'src/app/models/rental';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarImageService } from 'src/app/services/car-image.service';
@@ -14,6 +15,8 @@ import { RentalService } from 'src/app/services/rental.service';
 export class UserRentalsDetailsComponent implements OnInit {
   
   rentals:Rental[]=[];
+  car:Car[]=[];
+  carId:Car["carId"];
 
   constructor(
     private rentalService:RentalService,
@@ -24,16 +27,16 @@ export class UserRentalsDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetRentalUserDetails();
+    
   }
   getImagePath(imagePath: string) {
     return this.carImageService.getImagePath(imagePath);
   }
- 
 
 GetRentalUserDetails(){
   let userId=this.authService.getUser().id;
   this.rentalService.GetRentalUserDetails(userId).subscribe(response=>{
-    this.rentals=response.data    
+    this.rentals=response.data;      
   })
 }
 }

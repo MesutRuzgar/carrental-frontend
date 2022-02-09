@@ -1,8 +1,10 @@
 export class CreditCard {
-    cardNumber: string;
+    cardHolder: string;
+    cardNumber: string;  
+    cvc: string;
     expireYear: string;
     expireMonth: string;
-    cvc: string;
-    cardHolder: string;
+    findeksScore:number;
+  
     
 }

@@ -1,3 +1,5 @@
+import { CarImage } from "./carImage";
+
 export class Rental{
     id:number;
     carId:number;    
@@ -9,5 +11,6 @@ export class Rental{
     rentDate:Date;
     returnDate:Date;
     totalAmount:number;
+    carImage:CarImage[];
    
 }

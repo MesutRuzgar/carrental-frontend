@@ -12,7 +12,7 @@
                             <strong>Kiralama Numarası</strong>
                         </div>
                         <div class="col-md-2">
-                            <strong>Resim</strong>
+                            <strong>Araç Resimi</strong>
                         </div>
                         <div class="col-md-2">
                             <strong>Araç</strong>
@@ -34,7 +34,7 @@
                             {{rental.id}}
                         </div>
                         <div class="col-md-2">
-                            <!-- <img [src]="getImagePath(cars.carId)" height="50"> -->
+                            <img  [src]="getImagePath(rental.carImage[0].imagePath)" height="75px" width="90px" >
                         </div>
                         <div class="col-md-2">
                             {{rental.brandName | uppercase}}<br> {{rental.modelName| uppercase}}

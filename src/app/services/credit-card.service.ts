@@ -33,4 +33,8 @@ export class CreditCardService {
     let newPath = this.apiUrl + 'customercreditcards/deletecreditcard'
     return this.httpClient.post<ListResponseModel<CreditCard>>(newPath, customerCreditCard);
   }
+  getUserFindeks(userId:number){
+    let newPath = this.apiUrl + 'creditcards/getuserfindeks?userId='+userId;
+    return this.httpClient.get<SingleResponseModel<CreditCard>>(newPath);
+  }
 }

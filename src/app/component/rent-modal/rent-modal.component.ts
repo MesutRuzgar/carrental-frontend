@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CartService } from 'src/app/services/cart.service';
+import { CreditCardService } from 'src/app/services/credit-card.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 
@@ -22,6 +24,7 @@ export class RentModalComponent implements OnInit {
   returnDate:Date;
   rentDate:Date;
   toDayDate:Date;
+  findeksScore:number=0;
  
 
   constructor(private carService:CarService,
@@ -30,13 +33,16 @@ export class RentModalComponent implements OnInit {
     private cartService:CartService,
     private rentalService:RentalService,
     private carImageService:CarImageService,
+    private creditCardService:CreditCardService,
+    private authService:AuthService
     ) { }
 
     ngOnInit(): void { 
       this.activatedRoute.params.subscribe(params=>{
         this.getByCarId(params["carId"])
         this.getByCarImage(params["carId"])      
-      })   
+      })
+       
       } 
 
   getByCarId(carId:number){
@@ -51,22 +57,33 @@ export class RentModalComponent implements OnInit {
   }
   getImagePath(imagePath:string){ 
     return this.carImageService.getImagePath(imagePath);
-   }
- 
-  
-  checkDate(carId:number,rentDate:Date,returnDate:Date){      
-      this.rentalService.getCheckRentDate(carId,rentDate,returnDate).subscribe(result=>{
-      this.ikiTarihAraligiVarMi=result.data;
-      if(this.ikiTarihAraligiVarMi){
-        this.toastrService.error("Araç seçili tarihler arasında kiradadır. Lütfen başka tarih deneyiniz");
-      }else if(rentDate>returnDate){
-        this.toastrService.error("Teslim tarihi,Kiralama tarihinden önceki bir tarih olamaz!","Lütfen gerekli alanları düzeltiniz!");
+   } 
+   
+
+  checkDateAndFindeksScore(carId:number,rentDate:Date,returnDate:Date){
+     let userId=this.authService.getUser().id;
+     this.creditCardService.getUserFindeks(userId).subscribe(response=>{
+      this.findeksScore=response.data.findeksScore;
+      if(this.findeksScore>=this.cardetail.findeksScore){
+          this.rentalService.getCheckRentDate(carId,rentDate,returnDate).subscribe(result=>{
+          this.ikiTarihAraligiVarMi=result.data;
+          if(this.ikiTarihAraligiVarMi){
+            this.toastrService.error("Araç seçili tarihler arasında kiradadır. Lütfen başka tarih deneyiniz");
+          }else if(rentDate>returnDate){
+            this.toastrService.error("Teslim tarihi,Kiralama tarihinden önceki bir tarih olamaz!","Lütfen gerekli alanları düzeltiniz!");
+          }
+          else{     
+            this.cartService.addToCart(this.cardetail,rentDate,returnDate);        
+            document.getElementById("kapatbutonu").click();           
+          }
+        });
       }
-      else{     
-        this.cartService.addToCart(this.cardetail,rentDate,returnDate);        
-        document.getElementById("kapatbutonu").click();           
+      else
+      {
+        this.toastrService.error("Findeks Puanınız Araç İçin Yeterli Değil.","Lütfen Başka Araç Kiralamayı Deneyiniz")
       }
-    })
+     });
+      
   }
   
 }
