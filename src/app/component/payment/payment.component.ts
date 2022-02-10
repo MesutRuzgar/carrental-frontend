@@ -11,9 +11,9 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { UserForLogin } from 'src/app/models/userForLogin';
 import { AuthService } from 'src/app/services/auth.service';
 import { Customer } from 'src/app/models/customer';
-import { Rental } from 'src/app/models/rental';
 import { RentalService } from 'src/app/services/rental.service';
 import { RentModel } from 'src/app/models/rentModel';
+import { CustomerCreditCard } from 'src/app/models/customerCreditCard';
 
 @Component({
   selector: 'app-payment',
@@ -28,9 +28,8 @@ export class PaymentComponent implements OnInit {
   paymentForm:FormGroup;
   rememberMe:boolean=false; 
   customerId:number;
- 
-  
-  
+  customers:Customer;
+  customerCreditCards:CustomerCreditCard[]=[]; 
  
 
   constructor(
@@ -40,16 +39,18 @@ export class PaymentComponent implements OnInit {
     private cartService:CartService,
     private dateTimeService:DateTimeService,
     private formBuilder: FormBuilder,
-    private spinner: NgxSpinnerService,
+    private spinnerService: NgxSpinnerService,
     private router:Router,
     private authService:AuthService,
     private rentalService:RentalService) { }
+    
 
   ngOnInit(): void {
    this.getCart();
    this.createPaymentForm();
-   this.currentUser = this.authService.getUser()!;
+   this.currentUser = this.authService.getUser()!;  
    this.getCustomerId();
+   this.getCustomerCreditCards();
   }
 
   createPaymentForm() {
@@ -63,7 +64,7 @@ export class PaymentComponent implements OnInit {
   }
  
   payment(){
-    
+    this.spinnerService.show();
     if(this.rememberMe){
       this.saveCreditCard();
     }
@@ -73,27 +74,26 @@ export class PaymentComponent implements OnInit {
       .subscribe(response=>{        
         this.sonuc=response.data          
       if(this.sonuc){
-        this.toastrService.success("Ödeme Başarılı."); 
-        this.getCustomerId().then(customerId => {   
-            this.cartItems.forEach(cartItem=>{
+        this.toastrService.success("Ödeme Başarılı.");        
+              this.cartItems.forEach(cartItem=>{
               let rent : RentModel={
                 carId:cartItem.car.carId,
                 rentDate:cartItem.rentDate,
                 returnDate:cartItem.returnDate,
-                customerId:customerId,
+                customerId:this.customerId,
                 totalAmount : this.calculateTotalAmount()
               }; 
               this.rentalService.rent(rent).subscribe(response=>{   
                 this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.")             
             })          
-         });  
-                         
-        })       
+         });          
+             
         this.router.navigate(["/payment-success"])
-                     
+         this.spinnerService.hide();            
       }
       else{       
-        this.toastrService.error("Lütfen kart bilgilerinizi kontrol ediniz.","Kart bilgileriniz onaylanmadı.");       
+        this.toastrService.error("Lütfen kart bilgilerinizi kontrol ediniz.","Kart bilgileriniz onaylanmadı.");
+        this.spinnerService.hide();       
       }
       })      
     }
@@ -101,11 +101,13 @@ export class PaymentComponent implements OnInit {
 
   saveCreditCard(){
     if(this.paymentForm.valid){
+      
       let newUserCreditCard =Object.assign({},this.paymentForm.value);
-      this.creditCardService.saveCreditCard(newUserCreditCard).subscribe(response=>{
-        newUserCreditCard.customerId=this.getCustomerId();
+      newUserCreditCard.customerId=this.customerId;
+      this.creditCardService.saveCreditCard(newUserCreditCard).subscribe(response=>{        
         this.toastrService.success(response.message);
       },responseError=>{
+        console.log(responseError)
           if(responseError.error){
           this.toastrService.error("Kart Bilgileri Mevcut!","Ödeme Bilgileri Kaydedilemedi!")      
         }
@@ -117,30 +119,31 @@ export class PaymentComponent implements OnInit {
       })      
     }else{
       this.toastrService.error("Formunuz eksik","Lütfen gerekli alanları doldurunuz");
+      this.spinnerService.hide(); 
     }    
   }
-  
-  getCustomerId(): Promise<number> {
-    return new Promise<number>((methodResolve) => {
-      this.customerService.getCustomerByUserId(this.currentUser.id).subscribe(successResult => {
-        methodResolve(successResult.data.id);      
-      }, () => {  //If the user is not a customer, save it as a customer
+    
+  getCustomerId() {   
+        this.customerService.getCustomerByUserId(this.currentUser.id).subscribe(successResult => {
+        this.customerId=successResult.data.id;  
+      if(this.customerId==null) {
         let addedCustomer = new Customer;
         addedCustomer.userId = this.currentUser.id;
         addedCustomer.companyName = " Rent A Car ";
         this.customerService.addCustomer(addedCustomer).subscribe(successAddedResult => {
-          methodResolve(successAddedResult.data);
-        })
-      })
-    })
-  }
+          this.customers=successAddedResult.data;          
+         })
+       }
+    })       
+ };      
+  
 
-  createRentals(customerId: number){
-   let rentals: RentModel[]=[];    
+  createRentals(){
+    let rentals: RentModel[]=[];    
     this.cartItems.forEach(cartItem => {
       let rental: RentModel={        
         carId : cartItem.car.carId,
-        customerId : customerId,
+        customerId : this.customerId,
         rentDate : cartItem.rentDate,
         returnDate : cartItem.returnDate,
         totalAmount : this.calculateTotalAmount()   
@@ -158,6 +161,7 @@ export class PaymentComponent implements OnInit {
     });
     return totalRentalPeriod;    
    }  
+
    calculateTotalAmount():number{
     let totalAmount: number = 0;
     this.cartItems.forEach(cartItem=>{
@@ -167,8 +171,13 @@ export class PaymentComponent implements OnInit {
     })
     return totalAmount;
   }
+  getCustomerCreditCards(){      
+      this.creditCardService.getSavedCreditCards(this.customerId).subscribe(response=>{
+       this.customerCreditCards=response.data;
+    })
+  }
 
-    getCart(){
+  getCart(){
       this.cartItems=this.cartService.list();     
     }
     

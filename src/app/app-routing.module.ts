@@ -11,11 +11,13 @@ import { CartComponent } from './component/cart/cart.component';
 import { ColorAddComponent } from './component/color-add/color-add.component';
 import { ColorManagerComponent } from './component/color-manager/color-manager.component';
 import { ColorComponent } from './component/color/color.component';
+import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
 import { LoginComponent } from './component/login/login.component';
 import { PaymentSuccessComponent } from './component/payment-success/payment-success.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { RegisterComponent } from './component/register/register.component';
+import { RentalComponent } from './component/rental/rental.component';
 import { UserRentalsDetailsComponent } from './component/user-rentals-details/user-rentals-details.component';
 
 
@@ -30,7 +32,6 @@ const routes: Routes = [
   {path:"cart",component:CartComponent},
   {path:"payment",component:PaymentComponent},
   {path:"payment-success",component:PaymentSuccessComponent},
-  {path:"colors/add",component:ColorAddComponent},
   {path:"cars/add",component:CarAddComponent},
   {path:"brands/manager",component:BrandManagerComponent},
   {path:"colors/manager",component:ColorManagerComponent},
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:"profile",component:ProfileComponent},
   {path:"user-rental-detail",component:UserRentalsDetailsComponent},
-  
+  {path:"rentals",component:RentalComponent},
+  {path:"company-detail",component:CompanyDetailComponent},
 
 ];
 

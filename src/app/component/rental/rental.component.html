@@ -1,28 +1,73 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+<!-- <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
   <table *ngIf="dataLoaded==true" class="table">
-    <thead>
-        <tr>
-            
-            <th>Araba </th>
-            <th>Müsteri</th>
-            <th>Günlük Ücret</th>
-            <th>Kiralama Tarihi</th>
-            <th>Teslim Tarihi</th>
-            <th>Toplam Tutar</th>
-                       
-           
-        </tr>
-    </thead>
-    <tr *ngFor="let rental of rentals ">        
-        
-        <td>{{rental.modelName}}</td> 
-        <td>{{rental.customerName}}</td>
-        <td>{{rental.dailyPrice}} ₺</td>
-        <td>{{rental.rentDate}}</td> 
-        <td>{{rental.returnDate}}</td>
-        <td>{{rental.totalAmount}}</td>
-                     
-    </tr>
-</table>
+  
+</table> -->
+
+<div *ngIf="rentals" class="cont">
+    <div class="card">
+        <div class="card-header text-center bg-dark bg-gradient text-light">
+            <h3>Kiralamalar</h3>
+            (Toplam {{rentals.length}} kiralama mevcut)
+        </div>
+            <ul class="list-group">
+                <li class="list-group-item bg-warning bg-gradient text-center">
+                        <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <strong>Kiralama Numarası</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Araç Resimi</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Araç</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Kiralama Tarihi<br> &<br> Teslim Tarihi</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Müşteri</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Toplam Ücret</strong>
+                        </div>
+                    </div>
+                </li>
+                <li *ngFor="let rental of rentals"  class="list-group-item list-group-item-action text-center">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            {{rental.id}}
+                        </div>
+                        <div class="col-md-2">
+                            <img  [src]="getImagePath(rental.carImage[0].imagePath)" height="75px" width="90px" >
+                        </div>
+                        <div class="col-md-2">
+                            {{rental.brandName | uppercase}}<br> {{rental.modelName| uppercase}}
+                        </div>
+                        <div class="col-md-2">
+                            {{rental.rentDate | date: "dd/MM/yyyy" }}<br>{{rental.returnDate | date: "dd/MM/yyyy"}}
+                        </div>
+                        <div class="col-md-2">
+                            {{rental.customerName}}
+                        </div>
+                        <div class="col-md-2">
+                            {{rental.totalAmount | currency:"":""}}₺
+                        </div>                        
+                    </div>
+                </li>
+            </ul>
+            <li class="list-group-item bg-warning bg-gradient text-center">
+                <div class="row align-items-center">
+                <div class="col-md-8"></div>                
+                <div class="col-md-2">
+                    <strong>Toplam Kazanç:</strong> 
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            </div>
+        </li>      
+        </div>
+    </div>
+   

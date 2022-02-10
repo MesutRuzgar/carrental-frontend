@@ -28,9 +28,9 @@ export class CustomerService {
     let newPath = this.apiUrl + 'getbyuserid?userid=' + userId;
     return this.httpClient.get<SingleResponseModel<Customer>>(newPath);
   }
-  addCustomer(customer: Customer): Observable<SingleResponseModel<number>> {
+  addCustomer(customer: Customer): Observable<SingleResponseModel<Customer>> {
     let newPath = this.apiUrl + 'add';
-    return this.httpClient.post<SingleResponseModel<number>>(newPath, customer);
+    return this.httpClient.post<SingleResponseModel<Customer>>(newPath, customer);
   }
   update(customer:Customer): Observable<ResponseModel>{
     let newPath=this.apiUrl+'update'

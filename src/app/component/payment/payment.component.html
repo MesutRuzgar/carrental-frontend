@@ -1,7 +1,6 @@
-<div class="content"><br>
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box">
-    <p style="color: rgb(255, 255, 255)"> Ödeme yapılıyor... </p>
-</ngx-spinner>
+<div class="content"><br> 
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" 
+[fullScreen] = "true"><p style="color: white" > Ödeme Yapılıyor.. </p></ngx-spinner>  
     <div class="row">
     <div class="col-md-8">
         <div class="card">
@@ -9,7 +8,7 @@
             </div><br>
             <select  class=" form-select" aria-label="Default select example">
               <option selected value="0">Kayıtlı kredi kartlarım</option>
-              <option   value="{{currentUser.id}}"></option>
+              <option *ngFor="let customerCreditCard of customerCreditCards"   value="{{customerCreditCard.id}}"></option>
             </select>
             <div class="card-body">
               <form [formGroup]="paymentForm">
@@ -19,11 +18,11 @@
                 </div>
                   <div class="form-group">
                     <label for="card-number">Kart Numarası</label>
-                    <input  type="number" formControlName="cardNumber" class="form-control" id="card-number" name="cardNumber" maxlength="16" placeholder="Kartınızın ön yüzünde bulunan kart numarası" #eventcardnumber >
+                    <input  type="text" formControlName="cardNumber" class="form-control" id="card-number" name="cardNumber" maxlength="16" placeholder="Kartınızın ön yüzünde bulunan kart numarası" #eventcardnumber >
                   </div>
                 <div class="form-group">
                   <label for="card-cvv">Cvv</label>
-                  <input  type="number" formControlName="cvv" class="form-control" id="card-cvv" name="cvv" maxlength="3"  placeholder="Kartınızın arka yüzünde bulunan 3 haneli rakam" #eventcvv >
+                  <input  type="text" formControlName="cvv" class="form-control" id="card-cvv" name="cvv" maxlength="3"  placeholder="Kartınızın arka yüzünde bulunan 3 haneli rakam" #eventcvv >
                 </div>
             <div class="select">
                   <label for="card-expiration-month">Son Kullanma Tarihi</label><br>

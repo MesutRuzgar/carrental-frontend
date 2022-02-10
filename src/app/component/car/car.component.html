@@ -6,17 +6,17 @@
         <div class="col-sm-4">
           <select  [(ngModel)]="brandId" class=" form-select" aria-label="Default select example">
             <option selected value="0">Marka Seçiniz</option>
-            <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.brandName}}</option>
+            <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.brandName | uppercase}}</option>
           </select>
         </div>
         <div class="col-sm-4">
           <select  [(ngModel)]="colorId" class=" form-select" aria-label="Default select example">
             <option selected value="0">Renk Seçiniz</option>
-            <option *ngFor="let color of colors" value="{{color.id}}">{{color.colorName}}</option>
+            <option *ngFor="let color of colors" value="{{color.id}}">{{color.colorName | uppercase}}</option>
           </select>
         </div>
         <div class="col-sm-4">
-          <button (click)="getCarsWithBrandAndColor()" class=" btn btn-primary">Filter</button>
+          <button (click)="getCarsWithBrandAndColor()" class=" btn btn-primary">Filtrele</button>
         </div>       
       </div>
     <br>

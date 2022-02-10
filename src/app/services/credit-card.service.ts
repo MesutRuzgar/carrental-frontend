@@ -19,9 +19,9 @@ export class CreditCardService {
     return this.httpClient.get<SingleResponseModel<boolean>>(newPath);
   }  
 
-  getSavedCreditCards(customerId: number): Observable<ListResponseModel<CreditCard>> {
+  getSavedCreditCards(customerId: number): Observable<ListResponseModel<CustomerCreditCard>> {
     let newPath = this.apiUrl + 'customercreditcards/getcreditcardsbycustomerid'
-    return this.httpClient.post<ListResponseModel<CreditCard>>(newPath, customerId);
+    return this.httpClient.post<ListResponseModel<CustomerCreditCard>>(newPath, customerId);
   }
 
   saveCreditCard(customerCreditCard: CustomerCreditCard) {

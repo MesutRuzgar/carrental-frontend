@@ -6,14 +6,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Ana Sayfa</a>
-        </li>
-        
-       <app-cart-summary></app-cart-summary>
-        
-      </ul>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="">Ana Sayfa</a>                      
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/cars">Araç Filomuz</a>                      
+          </li>          
+          <app-cart-summary></app-cart-summary> 
+        <div class="dropdown" >
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">        
+            Yönetim
+          </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="btn dropdown-item"  routerLink="/company-detail">Genel Bilgiler</a></li>
+              <li><a class="btn dropdown-item"  routerLink="/rentals">Kiralamalar</a></li>
+              <li><a class="btn dropdown-item" routerLink="/brands/manager">Marka Yönetimi</a></li>
+              <li><a class="btn dropdown-item"  routerLink="/colors/manager">Renk Yönetimi</a></li>
+              <li><a class="btn dropdown-item"  routerLink="/cars/manager">Araç Yönetimi</a></li>
+          </ul>
+     </div>           
+      </ul> 
+     
       <div class="">
+        
         <button type="button" *ngIf="!userLoggedIn" routerLink="/login" class="btn btn-success">Giriş Yap</button>
         <button type="button" *ngIf="!userLoggedIn" routerLink="/register" class="btn btn-primary">Kayıt Ol</button>
       </div>
