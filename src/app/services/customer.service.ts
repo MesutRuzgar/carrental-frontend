@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Customer } from '../models/customer';
-import { CustomerDetailDto } from '../models/customerDetailDto';
+import { Customer } from '../models/customerDetailDto';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModule';
 import { SingleResponseModel } from '../models/singleResponseModel';
@@ -16,9 +15,9 @@ export class CustomerService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getCustomerDetails():Observable<ListResponseModel<CustomerDetailDto>>{
+  getCustomerDetails():Observable<ListResponseModel<Customer>>{
     let newPath = this.apiUrl + 'getcustomerdetails'
-    return this.httpClient.get<ListResponseModel<CustomerDetailDto>>(newPath);
+    return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
   getCustomersAll(): Observable<ListResponseModel<Customer>> {
     let newPath = this.apiUrl + 'getall';

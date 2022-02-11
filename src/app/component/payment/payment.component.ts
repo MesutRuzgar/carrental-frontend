@@ -10,10 +10,10 @@ import { DateTimeService } from 'src/app/services/date-time.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { UserForLogin } from 'src/app/models/userForLogin';
 import { AuthService } from 'src/app/services/auth.service';
-import { Customer } from 'src/app/models/customer';
 import { RentalService } from 'src/app/services/rental.service';
 import { RentModel } from 'src/app/models/rentModel';
 import { CustomerCreditCard } from 'src/app/models/customerCreditCard';
+import { Customer } from 'src/app/models/customerDetailDto';
 
 @Component({
   selector: 'app-payment',

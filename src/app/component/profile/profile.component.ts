@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-
-
 import { ToastrService } from 'ngx-toastr';
-import { Customer } from 'src/app/models/customer';
+import { Customer } from 'src/app/models/customerDetailDto';
 import { User } from 'src/app/models/user';
 import { UserForLogin } from 'src/app/models/userForLogin';
 import { AuthService } from 'src/app/services/auth.service';

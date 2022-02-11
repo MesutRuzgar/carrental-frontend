@@ -8,7 +8,6 @@ import { CarDetailComponent } from './component/car-detail/car-detail.component'
 import { CarManagerComponent } from './component/car-manager/car-manager.component';
 import { CarComponent } from './component/car/car.component';
 import { CartComponent } from './component/cart/cart.component';
-import { ColorAddComponent } from './component/color-add/color-add.component';
 import { ColorManagerComponent } from './component/color-manager/color-manager.component';
 import { ColorComponent } from './component/color/color.component';
 import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
