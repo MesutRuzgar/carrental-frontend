@@ -10,49 +10,57 @@
                         <label for="brandId" class="form-label">Marka Seçiniz</label>
                         <select id="brandId" class="form-select" formControlName="brandId">
                             <option *ngFor="let brand of brands" [ngValue]="brand.id">
-                                {{ brand.brandName }}
+                                {{ brand.brandName | uppercase }}
                             </option>
                         </select>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="mb-3">
-                        <label for="colorId" class="form-label">Renk Seçiniz</label>
-                        <select id="colorId" formControlName="colorId" class="form-select">
-                            <option *ngFor="let color of colors" [ngValue]="color.id">{{color.colorName}}</option>
-                        </select>
+                        <label for="modelName" class="form-label">Model İsmi</label>
+                        <input id="modelName" type="text" class="form-control" placeholder="Araç Model İsmi"
+                            formControlName="modelName" />
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <div class="mb-3">
-                        <label for="modelYear" class="form-label">Model Yılı</label>
-                        <input id="modelYear" type="number" class="form-control" placeholder="Araç model yılı"
-                            formControlName="modelYear" />
+                        <label for="colorId" class="form-label">Renk Seçiniz</label>
+                        <select id="colorId" formControlName="colorId" class="form-select">
+                            <option *ngFor="let color of colors" [ngValue]="color.id">{{color.colorName | uppercase}}</option>
+                        </select>
                     </div>
                 </div>
+                <div class="col-6">
+                    <label for="modelYear" class="form-label">Model Yılı</label>
+                    <input id="modelYear" type="number" class="form-control" placeholder="Araç Model Yılı" formControlName="modelYear" />
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-6">
                     <label for="dailyPrice" class="form-label">Günlük Ücret</label>
                     <div class="input-group md-3">
                         <span class="input-group-text">₺</span>
-                        <input id="dailyPrice" type="number" class="form-control" placeholder="Günlük ücreti yazınız"
+                        <input id="dailyPrice" type="number" class="form-control" placeholder="Günlük Ücreti Yazınız"
                             formControlName="dailyPrice" />
                     </div>
                 </div>
+                <div class="col-6">
+                        <label for="findeksScore" class="form-label">Kiralama İçin Gerekli Findeks Puanı</label>
+                        <input id="findeksScore" type="number" class="form-control" placeholder="Min. Findeks Puanı" formControlName="findeksScore" />
+                </div>
             </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Araç Resmi</label>
-              </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Açıklama</label>
                 <textarea id="description" type="text" class="form-control" placeholder="Açıklama giriniz"
                     formControlName="description" rows="3"></textarea>
             </div>
         </form>
-        <div class="card-footer">
-            <button (click)="add()" class="btn btn-outline-dark float-end">Araç Ekle</button>
-        </div>
+        <div class="row mt-3">
+            <div class="d-flex justify-content-end">
+                <button (click)="add()" type="button"  class="btn btn-success me-2">Ekle</button>
+                <button  (click)="closeCarAddModal()" id="kapatbutonu" type="button" class="btn btn-danger">İptal</button>
+            </div>
     </div>
 </div>

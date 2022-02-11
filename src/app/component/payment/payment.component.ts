@@ -43,13 +43,12 @@ export class PaymentComponent implements OnInit {
     private router:Router,
     private authService:AuthService,
     private rentalService:RentalService) { }
-    
 
   ngOnInit(): void {
    this.getCart();
-   this.createPaymentForm();
-   this.currentUser = this.authService.getUser()!;  
-   this.getCustomerId();
+   this.currentUser = this.authService.getUser()!;
+   this.getCustomerId();  
+   this.createPaymentForm();   
    this.getCustomerCreditCards();
   }
 
@@ -125,13 +124,13 @@ export class PaymentComponent implements OnInit {
     
   getCustomerId() {   
         this.customerService.getCustomerByUserId(this.currentUser.id).subscribe(successResult => {
-        this.customerId=successResult.data.id;  
+        this.customerId=successResult.data?.id;  
       if(this.customerId==null) {
         let addedCustomer = new Customer;
         addedCustomer.userId = this.currentUser.id;
         addedCustomer.companyName = " Rent A Car ";
         this.customerService.addCustomer(addedCustomer).subscribe(successAddedResult => {
-          this.customers=successAddedResult.data;          
+        this.customerId=successAddedResult.data.id;          
          })
        }
     })       
@@ -171,8 +170,8 @@ export class PaymentComponent implements OnInit {
     })
     return totalAmount;
   }
-  getCustomerCreditCards(){      
-      this.creditCardService.getSavedCreditCards(this.customerId).subscribe(response=>{
+  getCustomerCreditCards(){ 
+       this.creditCardService.getSavedCreditCards(this.customerId).subscribe(response=>{
        this.customerCreditCards=response.data;
     })
   }

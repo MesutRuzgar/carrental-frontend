@@ -1,0 +1,17 @@
+<body class="text-center">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner"><br><br><br>
+          <h3 class="masthead-brand">Hoşgeldiniz</h3>          
+        </div>
+      </header>
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Rent A Car</h1>
+        <p class="lead">Siz değerli müşterilerimize, kaliteli konforlu ve güvenilir hizmeti sağlamak için hassasiyetle çalışıyoruz.. </p>
+        <p class="lead">
+          <a *ngIf="userLoggedIn" routerLink="/cars" class="btn btn-lg btn-warning">Araç Filosu</a>
+          <a *ngIf="!userLoggedIn" routerLink="/login" class="btn btn-lg btn-success">Giriş Yap</a>
+        </p>
+      </main>     
+    </div> 
+  </body>

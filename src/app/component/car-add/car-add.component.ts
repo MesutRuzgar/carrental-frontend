@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,FormControl,Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brands';
 import { Color } from 'src/app/models/color';
@@ -21,7 +22,8 @@ export class CarAddComponent implements OnInit {
     private carService:CarService,
     private toastrService:ToastrService,
     private colorService:ColorService,
-    private brandService:BrandService) { }
+    private brandService:BrandService,
+    private carAddModal: MatDialogRef<CarAddComponent>) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -32,16 +34,21 @@ createCarAddForm() {
     this.carAddForm = this.formBuilder.group({
       brandId: ["", Validators.required],
       colorId: ["", Validators.required],
-      carName:["",Validators.required],
+      modelName:["",Validators.required],
       modelYear: ["", Validators.required],
       dailyPrice: ["", Validators.required],
-      description: ["", Validators.required]
+      description: ["", Validators.required],
+      findeksScore: ["",Validators.required]
     })
   }
   getBrands() {
     this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
     });
+  }
+
+  closeCarAddModal() {
+    this.carAddModal.close();
   }
 
   getColors() {

@@ -12,6 +12,7 @@ import { ColorAddComponent } from './component/color-add/color-add.component';
 import { ColorManagerComponent } from './component/color-manager/color-manager.component';
 import { ColorComponent } from './component/color/color.component';
 import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
+import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { PaymentSuccessComponent } from './component/payment-success/payment-success.component';
 import { PaymentComponent } from './component/payment/payment.component';
@@ -22,7 +23,7 @@ import { UserRentalsDetailsComponent } from './component/user-rentals-details/us
 
 
 const routes: Routes = [
-  {path:"",pathMatch:"full",component:CarComponent},
+  {path:"",pathMatch:"full",component:HomeComponent},
   {path:"cars",component:CarComponent},
   {path : "brands" , component : BrandComponent},
   {path : "colors" , component : ColorComponent},
