@@ -20,8 +20,8 @@ export class CreditCardService {
   }  
 
   getSavedCreditCards(customerId: number): Observable<ListResponseModel<CustomerCreditCard>> {
-    let newPath = this.apiUrl + 'customercreditcards/getcreditcardsbycustomerid'
-    return this.httpClient.post<ListResponseModel<CustomerCreditCard>>(newPath, customerId);
+    let newPath = this.apiUrl + 'customercreditcards/getcreditcardbycustomerid?customerId='+customerId
+    return this.httpClient.get<ListResponseModel<CustomerCreditCard>>(newPath);
   }
 
   saveCreditCard(customerCreditCard: CustomerCreditCard) {

@@ -16,8 +16,7 @@ import { DateTimeService } from 'src/app/services/date-time.service';
 export class CartComponent implements OnInit {
   paymentForm: FormGroup;
   cartItems:CartItem[]=[];  
-  returnDate:Date;
-  rentDate:Date;
+  
 
 
   constructor(private cartService:CartService,
@@ -43,19 +42,16 @@ export class CartComponent implements OnInit {
  calculateRent(returnDate:Date,rentDate:Date):number{
     let totalRentalPeriod: number = 0;  
      let rentalPeriod:number = this.dateTimeService.calculateRent(returnDate,rentDate);
-        totalRentalPeriod += rentalPeriod;
-        this.cartItems.forEach(cartItem=>{
-          cartItem.totalDay=totalRentalPeriod;
-        })  
+        totalRentalPeriod += rentalPeriod;     
           return totalRentalPeriod;  
  }  
 
   calculateTotalAmount():number{
     let totalAmount: number = 0;
-    this.cartItems.forEach(cartItem=>{
-      let calculateDay = this.calculateRent(cartItem.returnDate,cartItem.rentDate)
-      let amount = cartItem.car.dailyPrice * calculateDay
-      totalAmount += amount;
+      this.cartItems.forEach(cartItem=>{      
+       let calculateDay = this.calculateRent(cartItem.returnDate,cartItem.rentDate)
+         let amount = cartItem.car.dailyPrice * calculateDay
+           totalAmount += amount;     
     })
     return totalAmount;
   }

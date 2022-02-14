@@ -50,7 +50,7 @@ export class PaymentComponent implements OnInit {
    this.currentUser = this.authService.getUser()!;
    this.getCustomerId();  
    this.createPaymentForm();   
-   this.getCustomerCreditCards();
+   
   }
 
   createPaymentForm() {
@@ -124,8 +124,8 @@ export class PaymentComponent implements OnInit {
   }
     
   getCustomerId() {   
-        this.customerService.getCustomerByUserId(this.currentUser.id).subscribe(successResult => {
-        this.customerId=successResult.data?.id;  
+        this.customerService.getCustomerByUserId(this.currentUser.id).subscribe(response => {
+        this.customerId=response.data?.id;        
       if(this.customerId==null) {
         let addedCustomer = new Customer;
         addedCustomer.userId = this.currentUser.id;
@@ -134,6 +134,7 @@ export class PaymentComponent implements OnInit {
         this.customerId=successAddedResult.data.id;          
          })
        }
+       this.getCustomerCreditCards();
     })       
  }; 
  
