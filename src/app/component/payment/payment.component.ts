@@ -73,7 +73,8 @@ export class PaymentComponent implements OnInit {
       .subscribe(response=>{        
         this.sonuc=response.data          
       if(this.sonuc){
-        this.toastrService.success("Ödeme Başarılı.");        
+        this.toastrService.success("Ödeme Başarılı.");
+        this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.");              
               this.cartItems.forEach(cartItem=>{
               let rent : RentModel={
                 carId:cartItem.car.carId,
@@ -82,9 +83,8 @@ export class PaymentComponent implements OnInit {
                 customerId:this.customerId,
                 totalAmount : this.calculateTotalAmount()
               }; 
-              this.rentalService.rent(rent).subscribe(response=>{   
-                this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.")             
-            })          
+              this.rentalService.rent(rent).subscribe();     
+                      
          });          
              
         this.router.navigate(["/payment-success"])
@@ -137,20 +137,20 @@ export class PaymentComponent implements OnInit {
  };      
   
 
-  createRentals(){
-    let rentals: RentModel[]=[];    
-    this.cartItems.forEach(cartItem => {
-      let rental: RentModel={        
-        carId : cartItem.car.carId,
-        customerId : this.customerId,
-        rentDate : cartItem.rentDate,
-        returnDate : cartItem.returnDate,
-        totalAmount : this.calculateTotalAmount()   
-      };            
-      rentals.push(rental);    
-    });
-    return rentals;
-  }
+  // createRentals(){
+  //   let rentals: RentModel[]=[];    
+  //   this.cartItems.forEach(cartItem => {
+  //     let rental: RentModel={        
+  //       carId : cartItem.car.carId,
+  //       customerId : this.customerId,
+  //       rentDate : cartItem.rentDate,
+  //       returnDate : cartItem.returnDate,
+  //       totalAmount : this.calculateTotalAmount()   
+  //     };            
+  //     rentals.push(rental);    
+  //   });
+  //   return rentals;
+  // }
 
   calculateRent():number{
     let totalRentalPeriod: number = 0;

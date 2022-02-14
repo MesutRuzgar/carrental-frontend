@@ -10,12 +10,15 @@ import { DateTimeService } from 'src/app/services/date-time.service';
 })
 export class PaymentSuccessComponent implements OnInit {
 
-  cartItems:CartItem[]=[]; 
+  cartItems:CartItem[]=[];
+  
+
   constructor(private cartService:CartService,
     private dateTimeService:DateTimeService) { }
 
   ngOnInit(): void {
     this.getCart();
+    this.getFullDateTimeNow();
   }
  getCart(){
       this.cartItems=this.cartService.list();     
@@ -37,5 +40,9 @@ export class PaymentSuccessComponent implements OnInit {
         totalAmount += amount;
       })
       return totalAmount;
+    }
+    getFullDateTimeNow(){
+      let rentalDate=this.dateTimeService.getFullDateTimeNow();
+      return rentalDate;
     }
 }

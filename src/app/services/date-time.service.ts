@@ -15,5 +15,10 @@ export class DateTimeService {
     return days;
    }
   
+   getFullDateTimeNow():string{
+    let date = new Date();
+    let returnStr = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+    return returnStr;
+  }
 
 }

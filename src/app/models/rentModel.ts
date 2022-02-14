@@ -6,5 +6,6 @@ export class RentModel {
    rentDate:Date;
    returnDate:Date;
    totalAmount:number;
+  
    
   }
