@@ -31,6 +31,7 @@ export class PaymentComponent implements OnInit {
   customers:Customer;
   customerCreditCards:CustomerCreditCard[]=[]; 
  
+ 
 
   constructor(
     private customerService:CustomerService,
@@ -75,13 +76,13 @@ export class PaymentComponent implements OnInit {
       if(this.sonuc){
         this.toastrService.success("Ödeme Başarılı.");
         this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.");              
-              this.cartItems.forEach(cartItem=>{
+              this.cartItems.forEach(cartItem=>{               
               let rent : RentModel={
                 carId:cartItem.car.carId,
                 rentDate:cartItem.rentDate,
                 returnDate:cartItem.returnDate,
                 customerId:this.customerId,
-                totalAmount : this.calculateTotalAmount()
+                totalAmount : cartItem.car.dailyPrice*this.calculateRent(cartItem.returnDate,cartItem.rentDate)
               }; 
               this.rentalService.rent(rent).subscribe();     
                       
@@ -134,9 +135,8 @@ export class PaymentComponent implements OnInit {
          })
        }
     })       
- };      
-  
-
+ }; 
+ 
   // createRentals(){
   //   let rentals: RentModel[]=[];    
   //   this.cartItems.forEach(cartItem => {
@@ -151,20 +151,27 @@ export class PaymentComponent implements OnInit {
   //   });
   //   return rentals;
   // }
-
-  calculateRent():number{
-    let totalRentalPeriod: number = 0;
+  
+  calculateTotalRent():number{
+    let totalRentalDay: number = 0;
     this.cartItems.forEach(cartItem=>{
       let rentalPeriod:number = this.dateTimeService.calculateRent(cartItem.returnDate,cartItem.rentDate);
-      totalRentalPeriod += rentalPeriod;
+      totalRentalDay += rentalPeriod;
     });
-    return totalRentalPeriod;    
+    return totalRentalDay;    
    }  
 
-   calculateTotalAmount():number{
+  calculateRent(returnDate:Date,rentDate:Date):number{
+    let totalRentalPeriod: number = 0;  
+     let rentalPeriod:number = this.dateTimeService.calculateRent(returnDate,rentDate);
+        totalRentalPeriod += rentalPeriod;  
+          return totalRentalPeriod;  
+ }  
+
+  calculateTotalAmount():number{
     let totalAmount: number = 0;
     this.cartItems.forEach(cartItem=>{
-      let calculateDay = this.calculateRent()
+      let calculateDay = this.calculateRent(cartItem.returnDate,cartItem.rentDate)
       let amount = cartItem.car.dailyPrice * calculateDay
       totalAmount += amount;
     })

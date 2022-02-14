@@ -32,20 +32,21 @@ export class CartComponent implements OnInit {
     this.cartItems=this.cartService.list();
    
   }
-  // goToPayment(cartItems:CartItem[]):void{
-  //   this.cartItems;
-  // }
+ 
   goToPayment():void{
     
   }
   getImagePath(imagePath:string){ 
     return this.carImageService.getImagePath(imagePath);
    }
-
+   
  calculateRent(returnDate:Date,rentDate:Date):number{
     let totalRentalPeriod: number = 0;  
      let rentalPeriod:number = this.dateTimeService.calculateRent(returnDate,rentDate);
-        totalRentalPeriod += rentalPeriod;  
+        totalRentalPeriod += rentalPeriod;
+        this.cartItems.forEach(cartItem=>{
+          cartItem.totalDay=totalRentalPeriod;
+        })  
           return totalRentalPeriod;  
  }  
 

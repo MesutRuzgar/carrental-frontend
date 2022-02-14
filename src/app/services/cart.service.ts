@@ -3,24 +3,27 @@ import { ToastrService } from 'ngx-toastr';
 import { Car } from '../models/car';
 import { CartItem } from '../models/cartItem';
 import { CartItems } from '../models/cartItems';
+import { DateTimeService } from './date-time.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor(private toastrService:ToastrService) { }
+  constructor(private toastrService:ToastrService,
+    private dateTimeService:DateTimeService) { }
   
   addToCart(car:Car,rentDate:Date,returnDate:Date){
     let item = CartItems.find(c=>c.car.carId===car.carId);
     if(item){
       this.toastrService.error("Araç Tekrar eklenemez","Araç daha önce sepete eklenmiş!")
     }else{
-      let carItem=new CartItem();
-      carItem.car= car;
-      carItem.rentDate=rentDate;
-      carItem.returnDate=returnDate;
-      CartItems.push(carItem)
+      let cartItem=new CartItem();
+      cartItem.car= car;
+      cartItem.rentDate=rentDate;
+      cartItem.returnDate=returnDate;
+     
+      CartItems.push(cartItem)
       this.toastrService.success("Sepete eklendi.",car.modelName);
       this.toastrService.success("Ödeme için sepetinize gidiniz. "); 
       
@@ -34,4 +37,5 @@ export class CartService {
     list():CartItem[]{
         return CartItems;
     }
+ 
 }
