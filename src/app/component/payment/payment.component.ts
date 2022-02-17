@@ -30,7 +30,7 @@ export class PaymentComponent implements OnInit {
   customerId:number;
   customers:Customer;
   customerCreditCards:CustomerCreditCard[]=[];
- 
+  selectedSavedCreditCard: number = 0;
   paySavedCard: boolean=false;
  
  
@@ -69,10 +69,12 @@ export class PaymentComponent implements OnInit {
 
   payment(){
     this.spinnerService.show();
-    // if () {
-    //   let usingCard :CustomerCreditCard;
-    //   this.paymentForm.setValue({ cardHolderFullName: usingCard.cardHolder, cardNumber: usingCard.cardNumber, expireYear: usingCard.expireYear, expireMonth: usingCard.expireMonth, cvc: usingCard.cvc })
-    // }
+    if (this.paySavedCard) {
+      let usingCard :CustomerCreditCard=this.customerCreditCards[this.selectedSavedCreditCard];
+      this.paymentForm.setValue({ cardHolder: usingCard.cardHolder, cardNumber: usingCard.cardNumber,  expirationMonth: usingCard.expirationMonth,expirationYear: usingCard.expirationYear, cvv: usingCard.cvv });
+      console.log(usingCard)
+      console.log(this.paymentForm)
+    }
     if(this.rememberMe){
       this.saveCreditCard();
     }
@@ -105,6 +107,9 @@ export class PaymentComponent implements OnInit {
       }
       })      
     }
+  }
+  setPaySavedCard(){
+    this.paySavedCard = true;
   }
 
   saveCreditCard(){

@@ -7,12 +7,25 @@
             <div class="card-header"><h5 class="title">Ödeme Bilgileri</h5>
             </div><br>
             <img src="/assets/images/creditcardicons.png"><br>
+
+            <div *ngIf="customerCreditCards.length>0" class="d-flex justify-content-center mt-3" style="font-size: 18px;">
+                <div class="form-check form-switch">
+              <input (click)="setPaySavedCard()"  class="form-check-input" type="checkbox"
+                  role="switch" [(ngModel)]="paySavedCard">
+              <label class="form-check-label" for="flexSwitchCheckChecked">Kayıtlı kredi kartı ile ödeme</label>
+          </div>
+            </div>
+          
             
-            <select  class=" form-select" aria-label="Default select example">
+            <div *ngIf="paySavedCard==true" class="select">
+               <select   class=" form-select" aria-label="Default select example">
               <option selected value="0">Kayıtlı kredi kartlarım</option>
-              <option *ngFor="let customerCreditCard of customerCreditCards"   value="{{customerCreditCard.id}}">{{ '**** **** **** '+customerCreditCard.cardNumber.substr(12,4)}}</option>
+              <option *ngFor="let customerCreditCard of customerCreditCards"  (click)="setPaySavedCard()"  value="{{customerCreditCard.id}}">{{ '**** **** **** '+customerCreditCard.cardNumber.substr(12,4)}}</option>
             </select>
-            <div class="card-body">
+            </div>
+           
+
+            <div *ngIf="paySavedCard==false" class="card-body">
               <form [formGroup]="paymentForm">
                 <div class="form-group">
                   <label for="card-holder">Kart Sahibi</label>
