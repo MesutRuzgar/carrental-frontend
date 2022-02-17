@@ -38,17 +38,17 @@ export class CarManagerComponent implements OnInit {
     })
   }
 
-  // showCarUpdateModal(car: Car) {
-  //   const carUpdateModal = this.dialog.open(CarUpdateComponent, {
-  //     disableClose: true,
-  //     width: "40%"
-  //   });
-  //   carUpdateModal.componentInstance.currentCar = car;
+  showCarUpdateModal(car: Car) {
+    const carUpdateModal = this.dialog.open(CarUpdateComponent, {
+      disableClose: true,
+      width: "40%"
+    });
+    carUpdateModal.componentInstance.currentCar = car;
 
-  //   carUpdateModal.afterClosed().subscribe(result => {
-  //     this.ngOnInit();
-  //   })
-  // }
+    carUpdateModal.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    })
+  }
 
   showCarDeleteModal(car: Car) {
     const carDeleteModal = this.dialog.open(CarDeleteComponent, {

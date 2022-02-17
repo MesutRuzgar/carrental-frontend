@@ -60,7 +60,7 @@ createCarAddForm() {
     let carModel = Object.assign({}, this.carAddForm.value);
     if (this.carAddForm.valid) {
       this.carService.add(carModel).subscribe((response) => {
-        this.toastrService.success(`Car is added successfully`);
+        this.toastrService.success("Araç Başarıyla Kayıt Edildi");
       }, (responseError) => {
         if (responseError.error.Errors) {
           if (responseError.error.Errors.length > 0) {

@@ -13,6 +13,7 @@ import { ColorService } from 'src/app/services/color.service';
 export class ColorUpdateComponent implements OnInit {
   currentColor: Color;
   colorUpdateForm: FormGroup
+
   constructor(private colorService: ColorService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
@@ -25,6 +26,7 @@ export class ColorUpdateComponent implements OnInit {
   closeUpdateModal() {
     this.updateModal.close();
   }
+  
   update() {
     if (this.colorUpdateForm.valid) {
       let newColor = Object.assign({}, this.colorUpdateForm.value);

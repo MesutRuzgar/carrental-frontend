@@ -7,6 +7,7 @@
             <div class="card-header"><h5 class="title">Ödeme Bilgileri</h5>
             </div><br>
             <img src="/assets/images/creditcardicons.png"><br>
+            
             <select  class=" form-select" aria-label="Default select example">
               <option selected value="0">Kayıtlı kredi kartlarım</option>
               <option *ngFor="let customerCreditCard of customerCreditCards"   value="{{customerCreditCard.id}}">{{ '**** **** **** '+customerCreditCard.cardNumber.substr(12,4)}}</option>

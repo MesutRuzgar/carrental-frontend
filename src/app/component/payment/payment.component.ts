@@ -29,7 +29,9 @@ export class PaymentComponent implements OnInit {
   rememberMe:boolean=false; 
   customerId:number;
   customers:Customer;
-  customerCreditCards:CustomerCreditCard[]=[]; 
+  customerCreditCards:CustomerCreditCard[]=[];
+ 
+  paySavedCard: boolean=false;
  
  
 
@@ -62,9 +64,15 @@ export class PaymentComponent implements OnInit {
       expirationYear: ["", [Validators.required]],         
     })
   }
+
  
+
   payment(){
     this.spinnerService.show();
+    // if () {
+    //   let usingCard :CustomerCreditCard;
+    //   this.paymentForm.setValue({ cardHolderFullName: usingCard.cardHolder, cardNumber: usingCard.cardNumber, expireYear: usingCard.expireYear, expireMonth: usingCard.expireMonth, cvc: usingCard.cvc })
+    // }
     if(this.rememberMe){
       this.saveCreditCard();
     }
@@ -182,6 +190,7 @@ export class PaymentComponent implements OnInit {
        this.creditCardService.getSavedCreditCards(this.customerId).subscribe(response=>{
        this.customerCreditCards=response.data;
     })
+    
   }
 
   getCart(){
