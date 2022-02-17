@@ -37,4 +37,18 @@ export class CreditCardService {
     let newPath = this.apiUrl + 'creditcards/getuserfindeks?userId='+userId;
     return this.httpClient.get<SingleResponseModel<CreditCard>>(newPath);
   }
+  getCreditCardLogoSource(cardNumber: string) {
+    if (cardNumber == null) {
+      return '';
+    } else {
+      let startNum = cardNumber.charAt(0)
+      if (startNum == '1' ||startNum == '2' ||startNum == '3'  ) {
+        return '/assets/images/visa.png'
+      } else if (startNum == '4' ||startNum == '5' ||startNum == '6' ) {
+        return '/assets/images/master-card.png'
+      } else {
+        return '';
+      }
+    }
+  }
 }

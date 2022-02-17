@@ -10,6 +10,7 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./color-delete.component.css']
 })
 export class ColorDeleteComponent implements OnInit {
+  
   deletedColor: Color;
 
   constructor(

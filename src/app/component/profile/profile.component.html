@@ -13,7 +13,8 @@
         <div class="col-md-4"><br>
             <div class="row card">
                 <div class="card-header bg-warning bg-gradient text-center" >
-                   <strong>Kullanıcı Bilgilerim</strong> </div>
+                   <strong>Kullanıcı Bilgilerim</strong> 
+                </div>
                 <div class="card-body">
                     <div  class="row">
                         <div class="col-md-5  text-end">
@@ -41,9 +42,11 @@
                     </div><br>
                     <div class="card-footer text-center d-grid gap-2">                   
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#userUpdate">Bilgileri Güncelle</button>
-                    <button class="btn btn-success" disabled>Şifre Değiştir</button></div></div>
+                        <button class="btn btn-success" disabled>Şifre Değiştir</button>
+                    </div>
                 </div>
-            </div> <br>
+            </div>
+        </div> <br>
             <!-- COMPANY DETAIL -->
             <div class="col-md-4"><br>
                 <div class="row card">
@@ -59,15 +62,56 @@
                             <div class="col-md-7">
                                 <p>{{customers?.companyName}}</p>                            
                             </div>
-                        </div>
-                        
+                        </div>                        
                         <div class="card-footer text-center d-grid gap-2">                   
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#companyUpdate">Bilgileri Güncelle</button>
-                      
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#companyUpdate">Bilgileri Güncelle</button>                      
+                         </div>
+                    </div> 
+                </div>                       
+            </div> 
+    </div><br><br>
+      <!-- CREDITCARDS DETAIL -->               
+      <div  class="row card">         
+        <div class="card-header bg-warning bg-gradient text-center" >
+            <strong >Kayıtlı Kredi Kartlarım</strong><br>
+        </div><br>
+       <div class="row">          
+            <div *ngFor="let customerCreditCard of customerCreditCards"  class="col-md-6">
+                <div  class="card " style="background: aliceblue;">                   
+                    <div  class="card-body" >              
+                            <div class="btn-group float-end">                                                    
+                                <button data-bs-toggle="modal" data-bs-target="#creditCardDelete"  type="button" class="btn btn-danger px-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>                       
+                                </button> 
+                            </div><br><br>
+                            <div class="row">
+                                <p><strong>{{'**** **** **** ' + customerCreditCard.cardNumber.substr(12,4)}}</strong></p>
+                            </div>  <br>                      
+                        <div class="row">
+                            <div class="col-md-5"><br>                            
+                                    <strong>{{customerCreditCard.cardHolder}}</strong>                           
+                            </div>
+                            <div class="col-md-4"><br>                            
+                                <strong>{{customerCreditCard.expirationMonth}}/{{customerCreditCard.expirationYear}}</strong>                       
+                            </div>
+                            <div class="col-md-3">                            
+                                <img class="credit-card-logo" style="width: 70px;"
+                                [src]="getCreditCardLogoSource(customerCreditCard.cardNumber)">                          
+                            </div>                       
+                        </div>                                    
                     </div>
-                </div>  
-  <!-- USER UPDATE Modal -->
-  <div class="modal fade" id="userUpdate" tabindex="-1" aria-labelledby="userUpdateLabel" aria-hidden="true">
+                </div> 
+            </div><br>        
+        </div>
+    
+      </div>   
+</div> 
+
+<!-- USER UPDATE Modal -->
+<div class="modal fade" id="userUpdate" tabindex="-1" aria-labelledby="userUpdateLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -132,6 +176,23 @@
         </div>
       </div>
     </div>
-  </div>            
-             
-</div> 
+  </div>
+  <!-- CREDIT CARD DELETE Modal -->
+  <div   class="modal fade" id="creditCardDelete"  aria-labelledby="creditCardDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="creditCardDeleteLabel">Kayıtlı Kredi Kartı Silme Onayı</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div  class="modal-body">
+            <!-- Sonu <strong>{{customerCreditCards?.cardNumber.substr(12,4)}}</strong> ile biten kayıtlı kredi
+            kartınızı silmek istediğinize emin misiniz ? -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">İptal</button>
+          <button type="button"  class="btn btn-success" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>                        

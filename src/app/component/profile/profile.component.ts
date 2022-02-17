@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  Input,  OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CustomerCreditCard } from 'src/app/models/customerCreditCard';
 import { Customer } from 'src/app/models/customerDetailDto';
 import { User } from 'src/app/models/user';
 import { UserForLogin } from 'src/app/models/userForLogin';
 import { AuthService } from 'src/app/services/auth.service';
+import { CreditCardService } from 'src/app/services/credit-card.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,7 +17,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
+ 
+  customerCreditCards:CustomerCreditCard[]=[];
   currentUser: UserForLogin;
   updateProfileForm: FormGroup;
   updateCompanyForm: FormGroup;
@@ -28,15 +31,18 @@ export class ProfileComponent implements OnInit {
     private userService:UserService,
     private customerService:CustomerService,
     private toastrService:ToastrService,
-    private router:Router) { }
+    private router:Router,
+    private creditCardService:CreditCardService) { }
 
   ngOnInit(): void {   
     this.getByUser(); 
     this.getCustomerByUserId();  
     this.createUpdateProfileForm();
     this.createUpdateCompanyForm();
-    this.currentUser = this.authService.getUser()!;
+    this.currentUser = this.authService.getUser()!; 
+    this.getSavedCreditCards();
   }
+
   createUpdateProfileForm() {
     this.updateProfileForm = this.formBuilder.group({
       firstName: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -98,6 +104,14 @@ export class ProfileComponent implements OnInit {
           }
         };
     
+  deleteCreditCard(customerCreditCard: CustomerCreditCard){
+    customerCreditCard.customerId=this.customers.id;    
+    this.creditCardService.deleteCreditCard(customerCreditCard).subscribe(response=>{
+    this.toastrService.success(" Kayıtlı Kredi Kartınız Başarıyla Silindi", "Silme işlemi başarılı")              
+    }, errorResponse => {
+       this.toastrService.error(errorResponse.error.message, "Silme işlemi başarısız")
+   });
+  }
   
   getByUser(){
     let userId=this.authService.getUser().id;
@@ -106,15 +120,30 @@ export class ProfileComponent implements OnInit {
       
     });
   }
-  getCustomerByUserId(){
+  
+  getCustomerByUserId(){    
     let userId=this.authService.getUser().id;
-    this.customerService.getCustomerByUserId(userId).subscribe(response=>{
+    this.customerService.getCustomerByUserId(userId).subscribe(response=>{            
       this.customers=response.data;      
-    })
+      this.creditCardService.getSavedCreditCards(this.customers.id) .subscribe(response=>{
+        this.customerCreditCards=response.data;
+        })          
+    });     
   }
+
+  getSavedCreditCards(){
+    let customerId=this.customers.id;
+    this.creditCardService.getSavedCreditCards(customerId).subscribe(response=>{
+      this.customerCreditCards=response.data;
+      })          
+  }
+
   logOutAndGoLoginPage() {
     this.authService.logOut();
     this.router.navigate(["login"])
   }
-  
+
+  getCreditCardLogoSource(cardNumber: string) {
+    return this.creditCardService.getCreditCardLogoSource(cardNumber);
   }
+}
