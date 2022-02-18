@@ -71,13 +71,13 @@
             </div> 
     </div><br><br>
       <!-- CREDITCARDS DETAIL -->               
-      <div  class="row card">         
+      <div  *ngIf="customerCreditCards.length>0" class="row card">         
         <div class="card-header bg-warning bg-gradient text-center" >
             <strong >Kayıtlı Kredi Kartlarım</strong><br>
         </div><br>
        <div class="row">          
-            <div *ngFor="let customerCreditCard of customerCreditCards"  class="col-md-6">
-                <div  class="card " id="credit-card">                   
+            <div  *ngFor="let customerCreditCard of customerCreditCards"  class="col-md-6">
+                    <div  class="card " id="credit-card">                   
                     <div  class="card-body" >              
                             <div class="btn-group float-end">                                                    
                                 <button data-bs-toggle="modal" (click)="setCreditCard(customerCreditCard)" data-bs-target="#creditCardDelete"  type="button" class="btn btn-danger px-2">

@@ -75,15 +75,16 @@ export class PaymentComponent implements OnInit {
       console.log(usingCard)
       console.log(this.paymentForm)
     }
-    if(this.rememberMe){
-      this.saveCreditCard();
-    }
+    // if(this.rememberMe){
+    //   this.saveCreditCard();
+    // }
     if(this.paymentForm.valid){
       let payment = Object.assign({},this.paymentForm.value);
       this.creditCardService.getCheckCreditCard(payment.cardHolder,payment.cardNumber,payment.cvv,payment.expirationMonth,payment.expirationYear)
       .subscribe(response=>{        
         this.sonuc=response.data          
-      if(this.sonuc){
+      if(this.sonuc && this.rememberMe){
+        this.saveCreditCard();
         this.toastrService.success("Ödeme Başarılı.");
         this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.");              
               this.cartItems.forEach(cartItem=>{               
@@ -138,15 +139,7 @@ export class PaymentComponent implements OnInit {
     
   getCustomerId() {   
         this.customerService.getCustomerByUserId(this.currentUser.id).subscribe(response => {
-        this.customerId=response.data?.id;        
-      if(this.customerId==null) {
-        let addedCustomer = new Customer;
-        addedCustomer.userId = this.currentUser.id;
-        addedCustomer.companyName = " Rent A Car ";
-        this.customerService.addCustomer(addedCustomer).subscribe(successAddedResult => {
-        this.customerId=successAddedResult.data.id;          
-         })
-       };
+        this.customerId=response.data?.id;  
        this.getCustomerCreditCards();
     })       
  }; 

@@ -29,8 +29,12 @@ export class CarComponent implements OnInit {
   filterText="";
   dataLoaded=false;
 
-  constructor(private carService:CarService,private activatedRoute:ActivatedRoute,
-    private brandService:BrandService,private colorService:ColorService,private carImageService:CarImageService,
+  constructor(
+    private carService:CarService,
+    private activatedRoute:ActivatedRoute,
+    private brandService:BrandService,
+    private colorService:ColorService,
+    private carImageService:CarImageService,
    ) { }
 
   ngOnInit(): void {
