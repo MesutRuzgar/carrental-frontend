@@ -17,13 +17,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
- 
+  currentCreditCard:CustomerCreditCard;
   customerCreditCards:CustomerCreditCard[]=[];
   currentUser: UserForLogin;
   updateProfileForm: FormGroup;
   updateCompanyForm: FormGroup;
   users:User;
-  customers:Customer;
+  customers:Customer= new Customer();
 
   constructor( 
     private authService: AuthService,
@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
     this.createUpdateProfileForm();
     this.createUpdateCompanyForm();
     this.currentUser = this.authService.getUser()!; 
-    this.getSavedCreditCards();
+   
   }
 
   createUpdateProfileForm() {
@@ -105,7 +105,7 @@ export class ProfileComponent implements OnInit {
         };
     
   deleteCreditCard(customerCreditCard: CustomerCreditCard){
-    customerCreditCard.customerId=this.customers.id;    
+   
     this.creditCardService.deleteCreditCard(customerCreditCard).subscribe(response=>{
     this.toastrService.success(" Kayıtlı Kredi Kartınız Başarıyla Silindi", "Silme işlemi başarılı")              
     }, errorResponse => {
@@ -116,25 +116,22 @@ export class ProfileComponent implements OnInit {
   getByUser(){
     let userId=this.authService.getUser().id;
     this.userService.getById(userId).subscribe(response=>{
-      this.users=response.data;
-      
+      this.users=response.data;      
     });
   }
   
   getCustomerByUserId(){    
     let userId=this.authService.getUser().id;
     this.customerService.getCustomerByUserId(userId).subscribe(response=>{            
-      this.customers=response.data;      
-      this.creditCardService.getSavedCreditCards(this.customers.id) .subscribe(response=>{
-        this.customerCreditCards=response.data;
-        })          
+      this.customers=response.data;  
+      this.getSavedCreditCards();    
+               
     });     
   }
 
-  getSavedCreditCards(){
-    let customerId=this.customers.id;
-    this.creditCardService.getSavedCreditCards(customerId).subscribe(response=>{
-      this.customerCreditCards=response.data;
+  getSavedCreditCards(){    
+    this.creditCardService.getSavedCreditCards(this.customers.id).subscribe(response=>{
+      this.customerCreditCards=response.data;      
       })          
   }
 
@@ -145,5 +142,10 @@ export class ProfileComponent implements OnInit {
 
   getCreditCardLogoSource(cardNumber: string) {
     return this.creditCardService.getCreditCardLogoSource(cardNumber);
+  }
+
+  setCreditCardId(customerCreditCard:CustomerCreditCard){
+    this.currentCreditCard=customerCreditCard;
+    console.log(this.currentCreditCard)
   }
 }
