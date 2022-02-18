@@ -19,29 +19,30 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { RegisterComponent } from './component/register/register.component';
 import { RentalComponent } from './component/rental/rental.component';
 import { UserRentalsDetailsComponent } from './component/user-rentals-details/user-rentals-details.component';
+import { LoginGuard } from './guards/login.guard';
 
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
-  {path:"cars",component:CarComponent},
-  {path : "brands" , component : BrandComponent},
-  {path : "colors" , component : ColorComponent},
-  {path:"cars/brand/:brandId",component:CarComponent},
-  {path:"cars/color/:colorId",component:CarComponent},
-  {path:"cars/car-detail/:carId",component:CarDetailComponent},
-  {path:"cart",component:CartComponent},
-  {path:"payment",component:PaymentComponent},
-  {path:"payment-success",component:PaymentSuccessComponent},
-  {path:"cars/add",component:CarAddComponent},
-  {path:"brands/manager",component:BrandManagerComponent},
-  {path:"colors/manager",component:ColorManagerComponent},
-  {path:"cars/manager",component:CarManagerComponent},
+  {path:"cars",component:CarComponent, canActivate:[LoginGuard]},
+  {path : "brands" , component : BrandComponent, canActivate:[LoginGuard]},
+  {path : "colors" , component : ColorComponent, canActivate:[LoginGuard]},
+  {path:"cars/brand/:brandId",component:CarComponent, canActivate:[LoginGuard]},
+  {path:"cars/color/:colorId",component:CarComponent, canActivate:[LoginGuard]},
+  {path:"cars/car-detail/:carId",component:CarDetailComponent, canActivate:[LoginGuard]},
+  {path:"cart",component:CartComponent, canActivate:[LoginGuard]},
+  {path:"payment",component:PaymentComponent, canActivate:[LoginGuard]},
+  {path:"payment-success",component:PaymentSuccessComponent, canActivate:[LoginGuard]},
+  {path:"cars/add",component:CarAddComponent, canActivate:[LoginGuard]},
+  {path:"brands/manager",component:BrandManagerComponent, canActivate:[LoginGuard]},
+  {path:"colors/manager",component:ColorManagerComponent, canActivate:[LoginGuard]},
+  {path:"cars/manager",component:CarManagerComponent, canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
-  {path:"profile",component:ProfileComponent},
-  {path:"user-rental-detail",component:UserRentalsDetailsComponent},
-  {path:"rentals",component:RentalComponent},
-  {path:"company-detail",component:CompanyDetailComponent},
+  {path:"profile",component:ProfileComponent, canActivate:[LoginGuard]},
+  {path:"user-rental-detail",component:UserRentalsDetailsComponent, canActivate:[LoginGuard]},
+  {path:"rentals",component:RentalComponent, canActivate:[LoginGuard]},
+  {path:"company-detail",component:CompanyDetailComponent, canActivate:[LoginGuard]},
 
 ];
 

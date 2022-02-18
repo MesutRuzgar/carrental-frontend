@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject } from 'rxjs';
 
 import { LoginModel } from '../models/loginModel';
 import { RegisterModel } from '../models/registerModel';
@@ -17,19 +18,34 @@ export class AuthService {
   
   apiUrl="https://localhost:44322/api/auth/"
 
+  private loggedIn = new BehaviorSubject<boolean>(this.isTokenExpired());
 
+  public get loginStatus() {
+    return this.loggedIn.asObservable();
+  }
+
+  public get isLoggedIn() {
+    return this.loggedIn.getValue();
+  }
+
+  public set isLoggedIn(status: boolean) {
+    this.loggedIn.next(status);
+  }
+  
   constructor(
     private httpClient:HttpClient,
     private jwtHelperService: JwtHelperService,
     private localStorageService: LocalStorageService) { }
 
-    private isTokenExpired(): boolean {
+     isTokenExpired(): boolean {
       let token = this.getToken();
       if (token != null) {
         return !this.jwtHelperService.isTokenExpired(token);
-      }
+      }     
       return false;
+      
     }
+
     private getToken(): string | null {
       return this.localStorageService.getItem("token");
     }
@@ -81,6 +97,7 @@ export class AuthService {
       if (!user.roles) {  //if the user does not have a role
         user.roles = [];
       }
+      
       return user;
     }
     return undefined;

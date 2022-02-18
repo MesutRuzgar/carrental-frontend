@@ -20,16 +20,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getUser()!;
-    this.setUserLoggedIn();   
+    this.setUserLoggedIn();
+    
   }
 
-  addCustomer(){
-    if(this.userLoggedIn){
-      this.getCustomerId();
-    
-    } 
-  }
-  getCustomerId() {   
+  
+  getCustomer() { 
+    if(this.userLoggedIn){ 
     this.customerService.getCustomerByUserId(this.currentUser.id).subscribe(response => {
     this.customerId=response.data?.id;  
     if(this.customerId==null){
@@ -40,11 +37,14 @@ export class HomeComponent implements OnInit {
       this.customerId=successAddedResult.data.id;          
        });
     }
-})       
+  })
+ }       
 }; 
+
+
   setUserLoggedIn() {
     this.userLoggedIn = this.authService.isAuthenticated()
-    this.addCustomer();
+    this.getCustomer();
   }
 
 }
