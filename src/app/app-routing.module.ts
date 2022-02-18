@@ -19,6 +19,7 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { RegisterComponent } from './component/register/register.component';
 import { RentalComponent } from './component/rental/rental.component';
 import { UserRentalsDetailsComponent } from './component/user-rentals-details/user-rentals-details.component';
+import { AdminGuard } from './guards/admin.guard';
 import { LoginGuard } from './guards/login.guard';
 
 
@@ -33,16 +34,16 @@ const routes: Routes = [
   {path:"cart",component:CartComponent, canActivate:[LoginGuard]},
   {path:"payment",component:PaymentComponent, canActivate:[LoginGuard]},
   {path:"payment-success",component:PaymentSuccessComponent, canActivate:[LoginGuard]},
-  {path:"cars/add",component:CarAddComponent, canActivate:[LoginGuard]},
-  {path:"brands/manager",component:BrandManagerComponent, canActivate:[LoginGuard]},
-  {path:"colors/manager",component:ColorManagerComponent, canActivate:[LoginGuard]},
-  {path:"cars/manager",component:CarManagerComponent, canActivate:[LoginGuard]},
+  {path:"cars/add",component:CarAddComponent, canActivate:[LoginGuard, AdminGuard]},
+  {path:"brands/manager",component:BrandManagerComponent, canActivate:[LoginGuard, AdminGuard]},
+  {path:"colors/manager",component:ColorManagerComponent, canActivate:[LoginGuard, AdminGuard]},
+  {path:"cars/manager",component:CarManagerComponent, canActivate:[LoginGuard, AdminGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"profile",component:ProfileComponent, canActivate:[LoginGuard]},
   {path:"user-rental-detail",component:UserRentalsDetailsComponent, canActivate:[LoginGuard]},
-  {path:"rentals",component:RentalComponent, canActivate:[LoginGuard]},
-  {path:"company-detail",component:CompanyDetailComponent, canActivate:[LoginGuard]},
+  {path:"rentals",component:RentalComponent, canActivate:[LoginGuard, AdminGuard]},
+  {path:"company-detail",component:CompanyDetailComponent, canActivate:[LoginGuard, AdminGuard]},
 
 ];
 

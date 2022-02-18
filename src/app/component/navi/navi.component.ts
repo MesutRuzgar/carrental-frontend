@@ -11,7 +11,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navi.component.css']
 })
 export class NaviComponent implements OnInit {
-  userLoggedIn:boolean = false
+  userLoggedIn:boolean = false;
+  isAdmin:boolean=false;
   
   currentUser: UserForLogin;
   constructor(
@@ -22,6 +23,7 @@ export class NaviComponent implements OnInit {
   ngOnInit(): void {
     this.setUserLoggedIn();
     this.getCurrentUser();
+    this.getIsAdmin();
    }
    
    setUserLoggedIn() {
@@ -38,5 +40,10 @@ export class NaviComponent implements OnInit {
       window.location.reload();
     }, 1000);
   }
-
+  getIsAdmin(){
+   let gecerli=this.authService.isAdmin();
+    if(gecerli==true){
+      this.isAdmin=true;
+    }
+  }
 }

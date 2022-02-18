@@ -97,11 +97,18 @@ export class AuthService {
       if (!user.roles) {  //if the user does not have a role
         user.roles = [];
       }
-      
+      console.log(user)
       return user;
     }
     return undefined;
   }
-  
+
+  isAdmin(){
+    if(this.getUser().roles==["admin"]){     
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 }
