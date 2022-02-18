@@ -104,10 +104,10 @@ export class ProfileComponent implements OnInit {
           }
         };
     
-  deleteCreditCard(customerCreditCard: CustomerCreditCard){
-   
+  deleteCreditCard(customerCreditCard: CustomerCreditCard){   
     this.creditCardService.deleteCreditCard(customerCreditCard).subscribe(response=>{
-    this.toastrService.success(" Kayıtlı Kredi Kartınız Başarıyla Silindi", "Silme işlemi başarılı")              
+    this.toastrService.success(" Kayıtlı Kredi Kartınız Başarıyla Silindi", "Silme işlemi başarılı") 
+    document.getElementById("kapatbutonu").click();               
     }, errorResponse => {
        this.toastrService.error(errorResponse.error.message, "Silme işlemi başarısız")
    });
@@ -144,7 +144,7 @@ export class ProfileComponent implements OnInit {
     return this.creditCardService.getCreditCardLogoSource(cardNumber);
   }
 
-  setCreditCardId(customerCreditCard:CustomerCreditCard){
+  setCreditCard(customerCreditCard:CustomerCreditCard){
     this.currentCreditCard=customerCreditCard;
     console.log(this.currentCreditCard)
   }

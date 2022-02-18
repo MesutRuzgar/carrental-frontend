@@ -1,3 +1,4 @@
-.card{
-    height: 90%;    
+#credit-card.card{
+    height: 90%;  
+    background: aliceblue;  
 }

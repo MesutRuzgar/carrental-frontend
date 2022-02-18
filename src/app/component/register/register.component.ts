@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Customer } from 'src/app/models/customerDetailDto';
 import { AuthService } from 'src/app/services/auth.service';
+
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -13,12 +15,14 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   rememberMe: boolean = false;
+  customer:Customer;
   
   constructor( private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
     private localStorageService: LocalStorageService,
-    private router:Router) { }
+    private router:Router,
+   ) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -36,10 +40,10 @@ export class RegisterComponent implements OnInit {
   register(){
     if(this.registerForm.valid){
       let newUser = Object.assign({},this.registerForm.value);
-      this.authService.register(newUser).subscribe(response=>{       
-      this.toastrService.success("Tebrikler! Kayıt olundu.");
-      this.localStorageService.add("token", response.data.token);
-      this.router.navigate([""]);
+      this.authService.register(newUser).subscribe(response=>{
+      this.localStorageService.add("token", response.data.token);       
+      this.toastrService.success("Tebrikler! Kayıt olundu.");      
+      this.router.navigate(["/cars"]);
       if (this.rememberMe) {
         this.saveEmail(newUser.email);
       }
@@ -48,8 +52,10 @@ export class RegisterComponent implements OnInit {
                
       })
     }
-  }
+  }  
+
   saveEmail(email: string) {
     this.localStorageService.add("remember", email);
   }
+
 }

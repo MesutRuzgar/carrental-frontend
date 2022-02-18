@@ -146,7 +146,7 @@ export class PaymentComponent implements OnInit {
         this.customerService.addCustomer(addedCustomer).subscribe(successAddedResult => {
         this.customerId=successAddedResult.data.id;          
          })
-       }
+       };
        this.getCustomerCreditCards();
     })       
  }; 
