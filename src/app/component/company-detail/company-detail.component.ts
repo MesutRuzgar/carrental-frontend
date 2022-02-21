@@ -12,6 +12,7 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./company-detail.component.css']
 })
 export class CompanyDetailComponent implements OnInit {
+  totalEarnings:number;
   cars:Car[]=[];
   rentals:Rental[]=[];
   customers:Customer[]=[];
@@ -36,11 +37,17 @@ export class CompanyDetailComponent implements OnInit {
   getRentals(){
     this.rentalService.getRentals().subscribe(response=>{
       this.rentals=response.data;
+      this.getTotalEarnings();
     })
   }
   getCustomers(){
     this.customerService.getCustomerDetails().subscribe(response=>{
       this.customers=response.data;
 })
+  }
+  getTotalEarnings(){
+    this.rentalService.getTotalEarnings().subscribe(response=>{
+      this.totalEarnings=response.data;
+    })
   }
 }

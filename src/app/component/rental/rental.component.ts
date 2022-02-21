@@ -10,7 +10,7 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./rental.component.css']
 })
 export class RentalComponent implements OnInit {
-  
+  totalEarnings:number;
   rentals:Rental[]=[];
   dataLoaded=false;
 
@@ -19,6 +19,7 @@ export class RentalComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRentals();
+    this.getTotalEarnings();
      
     }
     getRentals(){
@@ -29,6 +30,12 @@ export class RentalComponent implements OnInit {
     }
     getImagePath(imagePath: string) {
       return this.carImageService.getImagePath(imagePath);
+    }
+
+    getTotalEarnings(){
+      this.rentalService.getTotalEarnings().subscribe(response=>{
+        this.totalEarnings=response.data;
+      })
     }
   }
 

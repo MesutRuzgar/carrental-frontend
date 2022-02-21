@@ -111,6 +111,9 @@ export class PaymentComponent implements OnInit {
   setPaySavedCard(){
     this.paySavedCard = true;
   }
+  setRenemberMe(){
+    this.rememberMe=true;
+  }
 
   saveCreditCard(){
     if(this.paymentForm.valid){

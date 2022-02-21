@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -32,5 +33,9 @@ export class RentalService {
   GetRentalUserDetails(userId:number):Observable<ListResponseModel<Rental>>{
     let newPath=this.apiUrl+"rentals/getrentalcustomerid?userId="+userId;
     return this.httpClient.get<ListResponseModel<Rental>>(newPath);
+  }
+  getTotalEarnings():Observable<SingleResponseModel<number>>{
+    let newPath=this.apiUrl+"rentals/gettotalamount";
+    return this.httpClient.get<SingleResponseModel<number>>(newPath);
   }
 }
