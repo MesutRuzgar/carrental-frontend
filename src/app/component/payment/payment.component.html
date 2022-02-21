@@ -1,3 +1,5 @@
+
+
 <div  class="content"><br> 
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" 
 [fullScreen] = "true"><p style="color: white" > Ödeme Yapılıyor.. </p></ngx-spinner>  
@@ -22,7 +24,7 @@
               <option selected value="0">Kayıtlı kredi kartlarım</option>
               <option *ngFor="let customerCreditCard of customerCreditCards"  (click)="setPaySavedCard()"  value="{{customerCreditCard.id}}">{{ '**** **** **** '+customerCreditCard.cardNumber.substr(12,4)}}</option>
             </select>
-            </div>
+            </div><br>
            
 
             <div *ngIf="paySavedCard==false" class="card-body">

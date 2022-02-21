@@ -23,7 +23,7 @@ export class AdminGuard implements CanActivate {
       if(this.authService.isAdmin()){
         return true;
       }else{
-        this.router.navigate(["login"])
+       
         this.toastrService.warning("Bu Sayfaya Erişim İzniniz Yok!","Lütfen Yetkili Hesap Girişi Yapınız!")
         return false;
       }
