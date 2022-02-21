@@ -1,15 +1,15 @@
 
     
     <!--Empty Cart Div-->
-    <!-- <div *ngIf="cartItems.length === 0" class="text-center mt-5 mb-5">
-        <h3>Sepetinizde araç bulunmamaktadır.</h3><br>
-        <button routerLink="" class="btn text-center mb-5" type="button"
-            style="background-color: var(--firstThemeColor); color: var(--secondThemeColor); border: 2px solid var(--secondThemeColor);">
-            <strong>Araç kiralamaya başla</strong>
-        </button> -->
-  
+    <div class="text">
+        <div *ngIf="cartItems.length === 0"  class="text-center mt-5 mb-5">
+            <h3><p>Sepetinizde araç bulunmamaktadır.</p></h3><br>
+            <button routerLink="/cars" type="button" class="btn btn-success btn-lg">Araç kiralamaya başla</button>
+    </div>
+
+
        
-  <div  class="cart_section">
+  <div  *ngIf="cartItems.length>0" class="cart_section">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 offset-lg-1">

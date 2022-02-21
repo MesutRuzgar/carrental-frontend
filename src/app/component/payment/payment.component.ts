@@ -74,17 +74,16 @@ export class PaymentComponent implements OnInit {
       this.paymentForm.setValue({ cardHolder: usingCard.cardHolder, cardNumber: usingCard.cardNumber,  expirationMonth: usingCard.expirationMonth,expirationYear: usingCard.expirationYear, cvv: usingCard.cvv });
       console.log(usingCard)
       console.log(this.paymentForm)
-    }
-    // if(this.rememberMe){
-    //   this.saveCreditCard();
-    // }
+    }  
     if(this.paymentForm.valid){
       let payment = Object.assign({},this.paymentForm.value);
       this.creditCardService.getCheckCreditCard(payment.cardHolder,payment.cardNumber,payment.cvv,payment.expirationMonth,payment.expirationYear)
       .subscribe(response=>{        
         this.sonuc=response.data          
-      if(this.sonuc && this.rememberMe){
-        this.saveCreditCard();
+      if(this.sonuc ){
+        if(this.rememberMe){
+          this.saveCreditCard();
+        }  
         this.toastrService.success("Ödeme Başarılı.");
         this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.");              
               this.cartItems.forEach(cartItem=>{               
