@@ -1,13 +1,10 @@
-
-    
-    <!--Empty Cart Div-->
-    <div class="text">
-        <div *ngIf="cartItems.length === 0"  class="text-center mt-5 mb-5">
+      <!--Empty Cart Div-->
+    <div  *ngIf="cartItems.length === 0" class="text" id="notlength">
+        <div  class="text-center mt-5 mb-5">
             <h3><p>Sepetinizde araç bulunmamaktadır.</p></h3><br>
             <button routerLink="/cars" type="button" class="btn btn-success btn-lg">Araç kiralamaya başla</button>
+        </div>
     </div>
-
-
        
   <div  *ngIf="cartItems.length>0" class="cart_section">
     <div class="container-fluid">

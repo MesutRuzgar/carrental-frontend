@@ -1,20 +1,41 @@
-<li  class="nav-item dropdown">   
-    <button type="button" id="navbarDropdown" data-bs-toggle="dropdown" class="btn btn-warning">
-      Araç Sepetim <span class="badge badge-light">{{cartItems.length}}</span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <li *ngFor="let cartItem of cartItems"><a class="dropdown-item">
-        <span class="badge bg-info text-dark">{{cartItem.rentDate | date:'dd' }}</span>{{cartItem.returnDate}}{{cartItem.car.modelName}}<span 
-        (click)="removeFromCart(cartItem.car)" class="badge bg-danger">Sil</span></a></li>
-      <li><hr class="dropdown-divider"></li>      
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">        
-        <button type="button" (click)="goToCart()" routerLink="/cart"  class="btn btn-success" [hidden]="cartItems.length === 0">Sepete Git</button>
-        <div *ngIf="cartItems.length === 0">
-         <span>
-           Sepetiniz Boş!
-         </span> 
+<div class="dropdown">
+  <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Araç Sepetim <span *ngIf="cartItems.length>0" class="badge badge-light">{{cartItems.length}}</span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li *ngFor="let cartItem of cartItems"><a class="dropdown-item">
+    
+      <div class="row">
+        <div class="col-md-4">
+          <img [src]="getImagePath(cartItem.car.carImage[0].imagePath)" width="83px" height="72px">
         </div>
         
+          <div class="col-md-4 text-center ">     
+        
+              <li> <strong>{{cartItem.car.modelName| uppercase}}</strong></li>
+             
+                <li> {{cartItem.rentDate| date: "dd/MM/yyyy"}}</li>
+                <li> {{cartItem.returnDate| date: "dd/MM/yyyy"}}</li>  
+          </div><br>
+          
+            <div class="col-md-4 " >
+              <span (click)="removeFromCart(cartItem.car)" id="dltbtn" class="badge bg-danger">Sil</span>
+            </div>
+      </div><br>         
+    </a></li>
+
+    <div class=" text-center">                   
+      <button *ngIf="cartItems.length>0" type="button" class="btn btn-success" (click)="goToCart()" routerLink="/cart">Sepete Git</button>
+      <div  *ngIf="cartItems.length === 0" class="text" >
+        <div  class="text-center mt-5 mb-5">
+            <h6>Sepetinizde araç bulunmamaktadır.</h6>
+        </div>
       </div>
-    </ul>
-  </li>
+  </div>
+     
+    
+     
+  </ul>
+  
+</div>
+
