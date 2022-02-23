@@ -1,3 +1,4 @@
+
 <div *ngIf="cartItems.length>0"  class="container">
     <div style="position: relative;">
         <div class="mt-5 mb-5 p-5">
@@ -34,8 +35,8 @@
                         </li>
                     </ul>
                 </div><br>
-                <button routerLink="/cars" class="btn btn-success">Ana menüye dön</button>
+                <button (click)="goHomePage()" class="btn btn-success">Ana menüye dön</button>
             </div>
         </div>
     </div>
-</div> 
+</div>  <br><br><br>  

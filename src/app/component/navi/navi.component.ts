@@ -24,10 +24,11 @@ export class NaviComponent implements OnInit {
     this.setUserLoggedIn();
     this.getCurrentUser();
     this.getIsAdmin();
+    
    }
    
    setUserLoggedIn() {
-    this.userLoggedIn = this.authService.isAuthenticated()
+    this.userLoggedIn = this.authService.isAuthenticated();
   }
   getCurrentUser() {
     this.currentUser = this.authService.getUser()!;
@@ -41,9 +42,12 @@ export class NaviComponent implements OnInit {
     }, 1000);
   }
   getIsAdmin(){
-   let gecerli=this.authService.isAdmin();
+    if(this.userLoggedIn==true){
+        let gecerli=this.authService.isAdmin();
     if(gecerli==true){
       this.isAdmin=true;
     }
+    }
+ 
   }
 }

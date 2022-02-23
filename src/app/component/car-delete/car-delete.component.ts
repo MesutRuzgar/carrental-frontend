@@ -21,8 +21,9 @@ export class CarDeleteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  
   }
-
+ 
   delete(car: Car) {
     this.carService.delete(car).subscribe(response => {
       this.toastrService.success(car.brandName + " " + car.modelName + " isimli araç silindi", "Silme işlemi başarılı");
@@ -38,4 +39,5 @@ export class CarDeleteComponent implements OnInit {
   closeCarDeleteModal() {
     this.carDeleteModal.close();
   }
+ 
 }

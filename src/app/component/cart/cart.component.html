@@ -1,65 +1,72 @@
-      <!--Empty Cart Div-->
-    <div  *ngIf="cartItems.length === 0" class="text" id="notlength">
+<div class="container">
+   <!--Empty Cart Div-->
+    <!-- <div  *ngIf="cartItems.length === 0" class="text" id="notlength">
         <div  class="text-center mt-5 mb-5">
             <h3><p>Sepetinizde araç bulunmamaktadır.</p></h3><br>
             <button routerLink="/cars" type="button" class="btn btn-success btn-lg">Araç kiralamaya başla</button>
         </div>
-    </div>
-       
-  <div  *ngIf="cartItems.length>0" class="cart_section">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 offset-lg-1">
-                <div  class="cart_container">
-                    <div class="cart_title">Kiralama Detayları<small></small></div>                   
-                    <div *ngFor="let cartItem of cartItems"  class="cart_items">                        
-                        <ul  class="cart_list">
-                            <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img class="image_css"  [src]="getImagePath(cartItem.car.carImage[0].imagePath)" ></div>                                
-                                <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                    <div class="cart_item_name cart_info_col">
-                                        <div class="cart_item_title">Araç</div>
-                                        <div  class="cart_item_text">{{cartItem.car.modelName}}</div>
+    </div> -->
+
+    <div   class="cart_section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 offset-lg-1">
+                    <div  class="cart_container">
+                        <div class="cart_title">Kiralama Detayları<small></small></div>                   
+                        <div *ngFor="let cartItem of cartItems"  class="cart_items">                        
+                            <ul  class="cart_list">
+                                <li class="cart_item clearfix">
+                                    <div class="cart_item_image"><img class="image_css"  [src]="getImagePath(cartItem.car.carImage[0].imagePath)" ></div>                                
+                                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                        <div class="cart_item_name cart_info_col">
+                                            <div class="cart_item_title">Araç</div>
+                                            <div  class="cart_item_text">{{cartItem.car.modelName}}</div>
+                                        </div>
+                                        <div class="cart_item_color cart_info_col">
+                                            <div class="cart_item_title">Kiralama Tarihi</div>
+                                            <div class="cart_item_text">{{cartItem.rentDate | date: "dd/MM/yyyy"}}</div>
+                                        </div>
+                                        <div class="cart_item_quantity cart_info_col">
+                                            <div class="cart_item_title">Teslim Tarihi</div>
+                                            <div class="cart_item_text">{{cartItem.returnDate | date: "dd/MM/yyyy"}}</div>
+                                        </div>
+                                        <div class="cart_item_price cart_info_col">
+                                            <div class="cart_item_title">Kiralama Süresi</div>
+                                            <div  class="cart_item_text">{{calculateRent(cartItem.returnDate,cartItem.rentDate)}} Gün </div>
+                                        </div>
+                                        <div class="cart_item_total cart_info_col">
+                                            <div class="cart_item_title">Günlük Ücret</div>
+                                            <div class="cart_item_text">{{cartItem.car.dailyPrice | currency:"":""}}₺</div>
+                                        </div>
+                                        <div class="cart_item_total cart_info_col">
+                                            <div class="cart_item_title">Kiralama Ücreti</div>
+                                            <div class="cart_item_text">{{cartItem.car.dailyPrice*calculateRent(cartItem.returnDate,cartItem.rentDate) | currency:"":""}}₺</div>
+                                        </div>
                                     </div>
-                                    <div class="cart_item_color cart_info_col">
-                                        <div class="cart_item_title">Kiralama Tarihi</div>
-                                        <div class="cart_item_text">{{cartItem.rentDate | date: "dd/MM/yyyy"}}</div>
-                                    </div>
-                                    <div class="cart_item_quantity cart_info_col">
-                                        <div class="cart_item_title">Teslim Tarihi</div>
-                                        <div class="cart_item_text">{{cartItem.returnDate | date: "dd/MM/yyyy"}}</div>
-                                    </div>
-                                    <div class="cart_item_price cart_info_col">
-                                        <div class="cart_item_title">Kiralama Süresi</div>
-                                        <div  class="cart_item_text">{{calculateRent(cartItem.returnDate,cartItem.rentDate)}} Gün </div>
-                                    </div>
-                                    <div class="cart_item_total cart_info_col">
-                                        <div class="cart_item_title">Günlük Ücret</div>
-                                        <div class="cart_item_text">{{cartItem.car.dailyPrice | currency:"":""}}₺</div>
-                                    </div>
-                                    <div class="cart_item_total cart_info_col">
-                                        <div class="cart_item_title">Kiralama Ücreti</div>
-                                        <div class="cart_item_text">{{cartItem.car.dailyPrice*calculateRent(cartItem.returnDate,cartItem.rentDate) | currency:"":""}}₺</div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>                   
-                    <div class="order_total">
-                        <div class="order_total_content text-md-right">                            
-                            <div class="order_total_title">Toplam Tutar:</div>
-                            <div class="order_total_amount">{{calculateTotalAmount() | currency:"":""}}₺</div>
+                                </li>
+                            </ul>
+                        </div>                   
+                        <div class="order_total">
+                            <div class="order_total_content text-md-right">                            
+                                <div class="order_total_title">Toplam Tutar:</div>
+                                <div class="order_total_amount">{{calculateTotalAmount() | currency:"":""}}₺</div>
+                            </div>
                         </div>
+                            <div  class="cart_buttons">
+                             <button routerLink="/cars" type="button" class="button cart_button_clear">Araç Filosu</button>
+                             <button *ngIf="cartItems.length>0" type="button" routerLink="/payment" (click)="goToPayment()"  class="button cart_button_checkout" >Sepeti Onayla 
+                                 
+                             </button> 
+                            </div>
                     </div>
-                        <div  class="cart_buttons">
-                         <button routerLink="/cars" type="button" class="button cart_button_clear">Araç Filosu</button>
-                         <button *ngIf="cartItems.length>0" type="button" routerLink="/payment" (click)="goToPayment()"  class="button cart_button_checkout" >Sepeti Onayla 
-                             
-                         </button> 
-                        </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+ </div>
+       
+        
+
+  
  

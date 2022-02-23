@@ -1,57 +1,60 @@
-
-  <div *ngIf="rentals" class="cont">
-    <div class="card">
-        <div class="card-header text-center bg-dark bg-gradient text-light">
-            <h3>Kiralama Geçmişim</h3>
-            (Toplam {{rentals.length}} kiralama mevcut)
-        </div>
-                   <ul class="list-group">
-                <li class="list-group-item bg-warning bg-gradient text-center">
+<div class="container">
+    <div *ngIf="rentals" class="cont">
+        <div class="card">
+            <div class="card-header text-center bg-dark bg-gradient text-light">
+                <h3>Kiralama Geçmişim</h3>
+                (Toplam {{rentals.length}} kiralama mevcut)
+            </div>
+                       <ul class="list-group">
+                    <li class="list-group-item bg-warning bg-gradient text-center">
+                            <div class="row align-items-center">
+                            <div class="col-md-2">
+                                <strong>Kiralama Numarası</strong>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>Araç Resimi</strong>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>Araç</strong>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>Kiralama Tarihi</strong>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>Teslim Tarihi</strong>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>Toplam Ücret</strong>
+                            </div>
+                        </div>
+                    </li>
+                    <li *ngFor="let rental of rentals"  class="list-group-item list-group-item-action text-center">
                         <div class="row align-items-center">
-                        <div class="col-md-2">
-                            <strong>Kiralama Numarası</strong>
+                            <div class="col-md-2">
+                                {{rental.id}}
+                            </div>
+                            <div class="col-md-2">
+                                <img  [src]="getImagePath(rental.carImage[0].imagePath)" height="75px" width="90px" >
+                            </div>
+                            <div class="col-md-2">
+                                {{rental.brandName | uppercase}}<br> {{rental.modelName| uppercase}}
+                            </div>
+                            <div class="col-md-2">
+                                {{rental.rentDate | date: "dd/MM/yyyy" }}
+                            </div>
+                            <div class="col-md-2">
+                                {{rental.returnDate | date: "dd/MM/yyyy"}}
+                            </div>
+                            <div class="col-md-2">
+                                {{rental.totalAmount | currency:"":""}}₺
+                            </div>
+                            
                         </div>
-                        <div class="col-md-2">
-                            <strong>Araç Resimi</strong>
-                        </div>
-                        <div class="col-md-2">
-                            <strong>Araç</strong>
-                        </div>
-                        <div class="col-md-2">
-                            <strong>Kiralama Tarihi</strong>
-                        </div>
-                        <div class="col-md-2">
-                            <strong>Teslim Tarihi</strong>
-                        </div>
-                        <div class="col-md-2">
-                            <strong>Toplam Ücret</strong>
-                        </div>
-                    </div>
-                </li>
-                <li *ngFor="let rental of rentals"  class="list-group-item list-group-item-action text-center">
-                    <div class="row align-items-center">
-                        <div class="col-md-2">
-                            {{rental.id}}
-                        </div>
-                        <div class="col-md-2">
-                            <img  [src]="getImagePath(rental.carImage[0].imagePath)" height="75px" width="90px" >
-                        </div>
-                        <div class="col-md-2">
-                            {{rental.brandName | uppercase}}<br> {{rental.modelName| uppercase}}
-                        </div>
-                        <div class="col-md-2">
-                            {{rental.rentDate | date: "dd/MM/yyyy" }}
-                        </div>
-                        <div class="col-md-2">
-                            {{rental.returnDate | date: "dd/MM/yyyy"}}
-                        </div>
-                        <div class="col-md-2">
-                            {{rental.totalAmount | currency:"":""}}₺
-                        </div>
-                        
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
+    
 
+</div><br><br><br>
+  

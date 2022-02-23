@@ -46,7 +46,8 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ProfileComponent } from './component/profile/profile.component';
 import { UserRentalsDetailsComponent } from './component/user-rentals-details/user-rentals-details.component';
 import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
-import { HomeComponent } from './component/home/home.component'; 
+import { HomeComponent } from './component/home/home.component';
+import { FooterComponent } from './component/footer/footer.component'; 
 
 
 
@@ -89,6 +90,7 @@ import { HomeComponent } from './component/home/home.component';
     UserRentalsDetailsComponent,
     CompanyDetailComponent,
     HomeComponent,
+    FooterComponent,
     
   
 

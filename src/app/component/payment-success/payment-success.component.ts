@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartItem } from 'src/app/models/cartItem';
 import { CartService } from 'src/app/services/cart.service';
 import { DateTimeService } from 'src/app/services/date-time.service';
@@ -14,14 +15,16 @@ export class PaymentSuccessComponent implements OnInit {
   
 
   constructor(private cartService:CartService,
-    private dateTimeService:DateTimeService) { }
+    private dateTimeService:DateTimeService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.getCart();
     this.getFullDateTimeNow();
   }
  getCart(){
-      this.cartItems=this.cartService.list();     
+      this.cartItems=this.cartService.list(); 
+      
     }
     calculateTotalRent():number{
       let totalRentalDay: number = 0;
@@ -51,5 +54,13 @@ export class PaymentSuccessComponent implements OnInit {
     getFullDateTimeNow(){
       let rentalDate=this.dateTimeService.getFullDateTimeNow();
       return rentalDate;
+    }
+
+    goHomePage(){
+      this.router.navigate(["/cars"]);
+      this.cartItems.forEach(cartItem=>{
+        this.cartService.removeFromCart(cartItem.car); 
+      }) 
+
     }
 }

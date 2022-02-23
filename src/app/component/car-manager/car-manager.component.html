@@ -1,70 +1,73 @@
-<div *ngIf="cars" class="cont">
-    <div class="card">
-        <div class="card-header text-center bg-dark bg-gradient text-light">
-            <h3>Araç Yönetimi</h3>
-            (Mevcut {{cars.length}} araç listelendi)
-        </div>
-        <div class="card-body table-responsive">
-            <div class="mb-3">
-                <label for="filterText" class="form-label">Araç Ara</label>
-                <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Aramak istediğiniz modeli yazınız">
-              </div>
-            <table class="table align-middle">
-                <thead>
-                    <tr class="bg-warning bg-gradient text-center">
-                        <th scope="col">Araç Kodu</th>
-                        <th scope="col">Araç Resmi</th>
-                        <th scope="col">Marka</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Renk</th>
-                        <th scope="col">Model Yılı</th>
-                        <th scope="col">Günlük Ücreti</th>
-                        <th scope="col">Açıklama</th>
-                        <th scope="col">Min. Findeks Puanı</th>
-                        <th scope="col"><button (click)="showCarAddModal()" type="button"
-                                class="btn btn-success float-end px-3">Araç ekle
-                            </button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let car of cars | carFilterPipe:filterText " class="text-center">
-                        <td><strong>{{car.carId}}</strong></td>
-                        <td><img [src]="getImagePath(car.carImage[0].imagePath)" height="75px" width="90px"></td>
-                        <td>{{car.brandName | uppercase}}</td>
-                        <td>{{car.modelName | uppercase}}</td>
-                        <td>{{car.colorName | uppercase}}</td>
-                        <td>{{car.modelYear}}</td>
-                        <td>{{car.dailyPrice}}</td>
-                        <td>{{car.description}}</td>
-                        <td>{{car.findeksScore | number }}</td>
-                        <td>
-                            <div class="btn-group float-end">
-                                <button routerLink="/cars/car-detail/{{car.carId}}"  type="button"
-                                    class="btn btn-warning px-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-search" viewBox="0 0 16 16">
-                                        <path
-                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                    </svg>
-                                </button>
-                           
-                                <button      (click)="showCarUpdateModal(car)"  type="button" class="btn btn-dark px-2">
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
-                                        <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z"/>
-                                      </svg>
-                                </button>
-                                <button (click)="showCarDeleteModal(car)" type="button" class="btn btn-danger px-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                      </svg>
-                                    
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+<div class="container">
+    <div *ngIf="cars" class="cont">
+        <div class="card">
+            <div class="card-header text-center bg-dark bg-gradient text-light">
+                <h3>Araç Yönetimi</h3>
+                (Mevcut {{cars.length}} araç listelendi)
+            </div>
+            <div class="card-body table-responsive">
+                <div class="mb-3">
+                    <label for="filterText" class="form-label">Araç Ara</label>
+                    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Aramak istediğiniz modeli yazınız">
+                  </div>
+                <table class="table align-middle">
+                    <thead>
+                        <tr class="bg-warning bg-gradient text-center">
+                            <th scope="col">Araç Kodu</th>
+                            <th scope="col">Araç Resmi</th>
+                            <th scope="col">Marka</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Renk</th>
+                            <th scope="col">Model Yılı</th>
+                            <th scope="col">Günlük Ücreti</th>
+                            <th scope="col">Açıklama</th>
+                            <th scope="col">Min. Findeks Puanı</th>
+                            <th scope="col"><button (click)="showCarAddModal()" type="button"
+                                    class="btn btn-success float-end px-3">Araç ekle
+                                </button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let car of cars | carFilterPipe:filterText " class="text-center">
+                            <td><strong>{{car.carId}}</strong></td>
+                            <td><img [src]="getImagePath(car.carImage[0].imagePath)" height="75px" width="90px"></td>
+                            <td>{{car.brandName | uppercase}}</td>
+                            <td>{{car.modelName | uppercase}}</td>
+                            <td>{{car.colorName | uppercase}}</td>
+                            <td>{{car.modelYear}}</td>
+                            <td>{{car.dailyPrice}}</td>
+                            <td>{{car.description}}</td>
+                            <td>{{car.findeksScore | number }}</td>
+                            <td>
+                                <div class="btn-group float-end">
+                                    <button routerLink="/cars/car-detail/{{car.carId}}"  type="button"
+                                        class="btn btn-warning px-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-search" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                        </svg>
+                                    </button>
+                               
+                                    <button      (click)="showCarUpdateModal(car)"  type="button" class="btn btn-dark px-2">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
+                                            <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z"/>
+                                          </svg>
+                                    </button>
+                                    <button (click)="showCarDeleteModal(car)" type="button" class="btn btn-danger px-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                          </svg>
+                                        
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+
+</div><br><br><br>

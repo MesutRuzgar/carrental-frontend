@@ -1,136 +1,137 @@
-
-
-<div *ngIf="cartItems.length>0" class="content"><br> 
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" 
-[fullScreen] = "true"><p style="color: white" > Ödeme Yapılıyor.. </p></ngx-spinner>  
-    <div class="row">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header"><h5 class="title">Ödeme Bilgileri</h5>
-        </div><br>
-            <img src="/assets/images/creditcardicons.png"><br>
-
-            <div *ngIf="customerCreditCards.length>0" class="d-flex justify-content-center mt-3" style="font-size: 18px;">
-                <div class="form-check form-switch">
-              <input (click)="setPaySavedCard()"  class="form-check-input" type="checkbox"
-                  role="switch" [(ngModel)]="paySavedCard">
-              <label class="form-check-label" for="flexSwitchCheckChecked">Kayıtlı kredi kartı ile ödeme</label>
-          </div>
-            </div>
-          
-            
-            <div *ngIf="paySavedCard==true" class="select">
-               <select   class=" form-select" aria-label="Default select example">
-              <option selected value="0">Kayıtlı kredi kartlarım</option>
-              <option *ngFor="let customerCreditCard of customerCreditCards"  (click)="setPaySavedCard()"  value="{{customerCreditCard.id}}">{{ '**** **** **** '+customerCreditCard.cardNumber.substr(12,4)}}</option>
-            </select>
+<div class="container">
+  <div  class="content"><br> 
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" 
+    [fullScreen] = "true"><p style="color: white" > Ödeme Yapılıyor.. </p></ngx-spinner>  
+        <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header"><h5 class="title">Ödeme Bilgileri</h5>
             </div><br>
-           
-
-            <div *ngIf="paySavedCard==false" class="card-body">
-              <form [formGroup]="paymentForm">
-                <div class="form-group">
-                  <label for="card-holder">Kart Sahibi</label>
-                  <input  type="text" formControlName="cardHolder" class="form-control"  id="card-holder" aria-describedby="emailHelp" maxlength="30" name="cardHolder"  placeholder="Kartınızın ön yüzünde bulunan isim" #eventcardholder>
-                </div>
-                  <div class="form-group">
-                    <label for="card-number">Kart Numarası</label>
-                    <input  type="text" formControlName="cardNumber" class="form-control" id="card-number" name="cardNumber" maxlength="16" placeholder="Kartınızın ön yüzünde bulunan kart numarası" #eventcardnumber >
-                  </div>
-                <div class="form-group">
-                  <label for="card-cvv">Cvv</label>
-                  <input  type="text" formControlName="cvv" class="form-control" id="card-cvv" name="cvv" maxlength="3"  placeholder="Kartınızın arka yüzünde bulunan 3 haneli rakam" #eventcvv >
-                </div>
-
-                <label for="card-expiration-month">Son Kullanma Tarihi</label><br>
-            <div class="select">                 
-                  <select  id="card-expiration-month" formControlName="expirationMonth" class="js-card-expiration-month" name="expirationMonth"  #eventexpirationmonth>
-                    <option disabled="disabled" value="" selected="selected">Ay</option>
-                    <option>01</option>
-                    <option>02</option>
-                    <option>03</option>
-                    <option>04</option>
-                    <option>05</option>
-                    <option>06</option>
-                    <option>07</option>
-                    <option>08</option>
-                    <option>09</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                </select>
-            </div>
-            <div class="select">
-              <select  id="card-expiration-year"  formControlName="expirationYear" class="js-card-expiration-year" name="expirationYear" #eventexpirationyear>
-                <option disabled="disabled" value="" selected="selected">Yıl</option>                    
-                    <option>22</option>
-                    <option>23</option>
-                    <option>24</option>
-                    <option>25</option>
-                    <option>26</option>
-                    <option>27</option>
-                    <option>28</option>
-                    <option>29</option>
-                    <option>30</option>
-                    <option>31</option>
-                </select>
-            </div>
-            <div class="checkbox mb-3 text-center">
-              <div class="d-flex justify-content-center mt-3" style="font-size: 18px;">
-                <div class="form-check form-switch">
-              <input   class="form-check-input" type="checkbox"
-                  role="switch" (click)="setRenemberMe()" [(ngModel)]="rememberMe" >
-              <label class="form-check-label" for="flexSwitchCheckChecked">Ödeme Bilgilerimi Hatırla</label>
-                </div>
+                <img src="/assets/images/creditcardicons.png"><br>
+    
+                <div *ngIf="customerCreditCards.length>0" class="d-flex justify-content-center mt-3" style="font-size: 18px;">
+                    <div class="form-check form-switch">
+                  <input (click)="setPaySavedCard()"  class="form-check-input" type="checkbox"
+                      role="switch" [(ngModel)]="paySavedCard">
+                  <label class="form-check-label" for="flexSwitchCheckChecked">Kayıtlı kredi kartı ile ödeme</label>
               </div>
-            </div>   
+                </div>
               
-                            
-              </form>
+                
+                <div *ngIf="paySavedCard==true" class="select">
+                   <select   class=" form-select" aria-label="Default select example">
+                  <option selected value="0">Kayıtlı kredi kartlarım</option>
+                  <option *ngFor="let customerCreditCard of customerCreditCards"  (click)="setPaySavedCard()"  value="{{customerCreditCard.id}}">{{ '**** **** **** '+customerCreditCard.cardNumber.substr(12,4)}}</option>
+                </select>
+                </div><br>
+               
+    
+                <div *ngIf="paySavedCard==false" class="card-body">
+                  <form [formGroup]="paymentForm">
+                    <div class="form-group">
+                      <label for="card-holder">Kart Sahibi</label>
+                      <input  type="text" formControlName="cardHolder" class="form-control"  id="card-holder" aria-describedby="emailHelp" maxlength="30" name="cardHolder"  placeholder="Kartınızın ön yüzünde bulunan isim" #eventcardholder>
+                    </div>
+                      <div class="form-group">
+                        <label for="card-number">Kart Numarası</label>
+                        <input  type="text" formControlName="cardNumber" class="form-control" id="card-number" name="cardNumber" maxlength="16" placeholder="Kartınızın ön yüzünde bulunan kart numarası" #eventcardnumber >
+                      </div>
+                    <div class="form-group">
+                      <label for="card-cvv">Cvv</label>
+                      <input  type="text" formControlName="cvv" class="form-control" id="card-cvv" name="cvv" maxlength="3"  placeholder="Kartınızın arka yüzünde bulunan 3 haneli rakam" #eventcvv >
+                    </div>
+    
+                    <label for="card-expiration-month">Son Kullanma Tarihi</label><br>
+                <div class="select">                 
+                      <select  id="card-expiration-month" formControlName="expirationMonth" class="js-card-expiration-month" name="expirationMonth"  #eventexpirationmonth>
+                        <option disabled="disabled" value="" selected="selected">Ay</option>
+                        <option>01</option>
+                        <option>02</option>
+                        <option>03</option>
+                        <option>04</option>
+                        <option>05</option>
+                        <option>06</option>
+                        <option>07</option>
+                        <option>08</option>
+                        <option>09</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                    </select>
+                </div>
+                <div class="select">
+                  <select  id="card-expiration-year"  formControlName="expirationYear" class="js-card-expiration-year" name="expirationYear" #eventexpirationyear>
+                    <option disabled="disabled" value="" selected="selected">Yıl</option>                    
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                        <option>25</option>
+                        <option>26</option>
+                        <option>27</option>
+                        <option>28</option>
+                        <option>29</option>
+                        <option>30</option>
+                        <option>31</option>
+                    </select>
+                </div>
+                <div class="checkbox mb-3 text-center">
+                  <div class="d-flex justify-content-center mt-3" style="font-size: 18px;">
+                    <div  class="form-check form-switch">
+                  <input   class="form-check-input" type="checkbox"
+                      role="switch" (click)="setRenemberMe()"  >
+                  <label class="form-check-label" for="flexSwitchCheckChecked">Ödeme Bilgilerimi Hatırla</label>
+                    </div>
+                  </div>
+                </div>                    
+                                
+                  </form>
+                </div>
+                <div class="card-footer">
+                  <li  class="list-group border border-light">
+                    <span class="d-flex flex-column float-end">
+                      <a  (click)="payment()"  class="btn btn-success">Ödeme Yap</a>                 
+                    </span>
+                </li>
+                </div>
             </div>
-            <div class="card-footer">
-              <li  class="list-group border border-light">
-                <span class="d-flex flex-column float-end">
-                  <a  (click)="payment()"  class="btn btn-success">Ödeme Yap</a>                 
-                </span>
-            </li>
-            </div>
-        </div>
-      </div>
-      <!--Order Summary-->
-      <div  class="col-md-4">
-        <div  class="card">
-            <div class="card-body">
-                <h5 class="card-title">Sipariş Özeti</h5>
-                <p class="card-text">
-                <ul class="list-group">
-                    <li class="list-group-item border border-light">
-                        <small>
-                            <span class="float-start">Toplam kiralanan araç sayısı:</span>
-                            <span class="float-end"><strong>{{cartItems.length}} araç</strong></span>
-                        </small>
-                    </li>
-                    <li class="list-group-item border border-light">
-                        <small>
-                            <span class="float-start">Toplam kiralama süresi: </span>
-                            <span class="float-end">
-                                <strong>
-                                    {{calculateTotalRent()}} gün
-                                </strong>
+          </div>
+          <!--Order Summary-->
+          <div  class="col-md-4">
+            <div  class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Sipariş Özeti</h5>
+                    <p class="card-text">
+                    <ul class="list-group">
+                        <li class="list-group-item border border-light">
+                            <small>
+                                <span class="float-start">Toplam kiralanan araç sayısı:</span>
+                                <span class="float-end"><strong>{{cartItems.length}} araç</strong></span>
+                            </small>
+                        </li>
+                        <li class="list-group-item border border-light">
+                            <small>
+                                <span class="float-start">Toplam kiralama süresi: </span>
+                                <span class="float-end">
+                                    <strong>
+                                        {{calculateTotalRent()}} gün
+                                    </strong>
+                                </span>
+                            </small>
+                        </li>
+                        <li class="list-group-item border border-light">
+                            <small>
+                                <span class="float-start">Ödenecek tutar: </span>
+                            </small>
+                            <span class="float-end text-danger">
+                                <strong>{{calculateTotalAmount() | currency:"":""}}₺</strong>
                             </span>
-                        </small>
-                    </li>
-                    <li class="list-group-item border border-light">
-                        <small>
-                            <span class="float-start">Ödenecek tutar: </span>
-                        </small>
-                        <span class="float-end text-danger">
-                            <strong>{{calculateTotalAmount() | currency:"":""}}₺</strong>
-                        </span>
-                    </li>                  
-                </ul>
+                        </li>                  
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div>    
-  </div>
-</div>
+        </div>    
+      </div>
+    </div>
+
+</div> <br><br><br>  
+

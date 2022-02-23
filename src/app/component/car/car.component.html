@@ -1,67 +1,81 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
-  
-    <h1>Araç Filtreleme</h1>
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <select  [(ngModel)]="brandId" class=" form-select" aria-label="Default select example">
-            <option selected value="0">Marka Seçiniz</option>
-            <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.brandName | uppercase}}</option>
-          </select>
-        </div>
-        <div class="col-sm-4">
-          <select  [(ngModel)]="colorId" class=" form-select" aria-label="Default select example">
-            <option selected value="0">Renk Seçiniz</option>
-            <option *ngFor="let color of colors" value="{{color.id}}">{{color.colorName | uppercase}}</option>
-          </select>
-        </div>
-        <div class="col-sm-4">
-          <button (click)="getCarsWithBrandAndColor()" class=" btn btn-primary">Filtrele</button>
-        </div>       
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <app-brand></app-brand>
+        <app-color></app-color>
       </div>
-    <br>
-
-              <div class="mb-3">
-            <label for="filterText" class="form-label">Araba Ara</label>
-            <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Aramak istediğiniz araba modelini yazınız">
+      <div class="col-md-9">
+       
+        <h1>Araç Filtreleme</h1>
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <select  [(ngModel)]="brandId" class=" form-select" aria-label="Default select example">
+              <option selected value="0">Marka Seçiniz</option>
+              <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.brandName | uppercase}}</option>
+            </select>
           </div>
-        <div *ngIf="filterText.length>=2" class="alert alert-warning">
-        {{filterText}} Aranıyor
+          <div class="col-sm-4">
+            <select  [(ngModel)]="colorId" class=" form-select" aria-label="Default select example">
+              <option selected value="0">Renk Seçiniz</option>
+              <option *ngFor="let color of colors" value="{{color.id}}">{{color.colorName | uppercase}}</option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <button (click)="getCarsWithBrandAndColor()" class=" btn btn-primary">Filtrele</button>
+          </div>       
         </div>
-
-  <div class="row">
-    <div  class="col-lg-4 col-md-6 p-3 mb-5 bg-body rounded " *ngFor="let car of cars | carFilterPipe:filterText "  >
-      <div class="card border-0 mb-3" style="width: 18rem;">
-        <!-- <img src="car-image" *ngIf="car.carImage.length==0" src="{{imgUrl}}{{defaultImage}}"> -->
-        <img *ngIf="car.carImage.length!=0" class="car-image" [src]="getImagePath(car.carImage[0].imagePath)" class="card-img-top" alt="Image" width="300" height="200">
-        <div class="card-body text-center">
-          <h4>
-            <a class="card-title text-decoration-none h5" style="color:#007bff;"><strong>{{car.modelName | uppercase}}</strong> </a>
-          </h4>
-        </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <span class="float-start">Marka</span>
-              <span class="float-end">{{car.brandName | uppercase}}</span>
-            </li>
-            <li class="list-group-item">
-              <span class="float-start">Renk</span>
-              <span class="float-end">{{car.colorName | uppercase}}</span>
-            </li>
-            <li class="list-group-item">
-              <span class="float-start">Model</span>
-              <span class="float-end">{{car.modelYear}}</span>
-            </li>
-            <li class="list-group-item">
-              <span class="float-start">Min. Findeks Puanı</span>
-              <span class="float-end">{{car.findeksScore | number}}</span>
-            </li>           
-            </ul>
-            <div class="card-body">             
-                <a (click)="setCurrentCar(car)" routerLink="/cars/car-detail/{{car.carId}}"
-                class="btn btn-primary">Detaylar</a>              
+      <br>
+  
+                <div class="mb-3">
+              <label for="filterText" class="form-label">Araba Ara</label>
+              <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Aramak istediğiniz araba modelini yazınız">
             </div>
+          <div *ngIf="filterText.length>=2" class="alert alert-warning">
+          {{filterText}} Aranıyor
           </div>
+  
+    <div class="row">
+      <div  class="col-lg-4 col-md-6 p-3 mb-5 bg-body rounded " *ngFor="let car of cars | carFilterPipe:filterText "  >
+        <div class="card border-0 mb-3" style="width: 18rem;">
+          <!-- <img src="car-image" *ngIf="car.carImage.length==0" src="{{imgUrl}}{{defaultImage}}"> -->
+          <img *ngIf="car.carImage.length!=0" class="car-image" [src]="getImagePath(car.carImage[0].imagePath)" class="card-img-top" alt="Image" width="300" height="200">
+          <div class="card-body text-center">
+            <h4>
+              <a class="card-title text-decoration-none h5" style="color:#007bff;"><strong>{{car.modelName | uppercase}}</strong> </a>
+            </h4>
           </div>
-          </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <span class="float-start">Marka</span>
+                <span class="float-end">{{car.brandName | uppercase}}</span>
+              </li>
+              <li class="list-group-item">
+                <span class="float-start">Renk</span>
+                <span class="float-end">{{car.colorName | uppercase}}</span>
+              </li>
+              <li class="list-group-item">
+                <span class="float-start">Model</span>
+                <span class="float-end">{{car.modelYear}}</span>
+              </li>
+              <li class="list-group-item">
+                <span class="float-start">Min. Findeks Puanı</span>
+                <span class="float-end">{{car.findeksScore | number}}</span>
+              </li>           
+              </ul>
+              <div class="card-body">             
+                  <a (click)="setCurrentCar(car)" routerLink="/cars/car-detail/{{car.carId}}"
+                  class="btn btn-primary">Detaylar</a>              
+              </div>
+            </div>
+            </div>
+            </div>
+      </div>
+    </div>
+    
+     
+
+  </div>
+ 

@@ -12,7 +12,9 @@
           <li class="nav-item">
             <a class="nav-link active" routerLink="/cars">Araç Filomuz</a>                      
           </li>          
-          <app-cart-summary></app-cart-summary> 
+          <li *ngIf="userLoggedIn" class="nav-item">
+           <app-cart-summary></app-cart-summary>  
+          </li>
         <div class="dropdown" >
           <button *ngIf="isAdmin === true" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">        
             Yönetim

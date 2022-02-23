@@ -85,8 +85,9 @@ export class PaymentComponent implements OnInit {
           this.saveCreditCard();
         }  
         this.toastrService.success("Ödeme Başarılı.");
-        this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.");              
-              this.cartItems.forEach(cartItem=>{               
+        this.toastrService.success("Bizi Ettiğiniz İçin Teşekkür Ederiz.");                     
+              this.cartItems.forEach(cartItem=>{
+                              
               let rent : RentModel={
                 carId:cartItem.car.carId,
                 rentDate:cartItem.rentDate,
